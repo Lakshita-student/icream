@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Naturals Ice Cream Blog</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+     /* Top Bar */
+     .top-bar {
+      background: #f9a9c4;
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: white;
+      align-items: center;
+      height: 100px;
+    }
+
+    .top-bar a {
+      color: white;
+      margin: 0 0.5rem;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .left-links a::after {
+      content: "";
+    }
+
+    .right-icons a {
+      margin-left: 10px;
+      font-size: 16px;
+      /* or maybe 20px depending on what you want */
+      color: white;
+    }
+
+    .cart-icon a {
+      margin-left: 10px;
+      font-size: 16px;
+      /* or maybe 20px depending on what you want */
+      color: white;
+    }
+
+    #cartIcon {
+      position: relative;
+      display: inline-block;
+    }
+
+
+    /* Navigation Bar */
+    .navbar {
+      background: white;
+      border-radius: 40px;
+      padding: 1.2rem 2rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+      width: 90%;
+      max-width: 1200px;
+      margin: -40px auto 0;
+      z-index: 10;
+      position: relative;
+      height: 90px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      margin-top: -20px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      font-size: 15px;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a.active,
+    .nav-links a:hover {
+      color: #f57aa7;
+    }
+
+    .logo {
+      font-size: 50px;
+      font-weight: 700;
+      color: #40cbee;
+    }
+
+    .logo span {
+      color: #f57aa7;
+    }
+
+    head {
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 36px;
+      color: #222;
+      margin-left:600px;
+      margin-bottom: 30px;
+      margin-top:-5px;
+    }
+
+    .breadcrumb {
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 9px;
+      margin-left:610px;
+      margin-top:20px;
+    }
+
+    .blog-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
+  margin: 0 auto;
+}
+
+.blog-card {
+  flex: 1 1 calc(33.333% - 30px); /* 3 cards per row, with spacing */
+  max-width: 300px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  background: #fff;
+  transition: transform 0.3s;
+}
+
+
+    .blog-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .blog-card:hover img {
+  animation: pulse 1s;
+}
+
+
+    .blog-card img {
+      width: 100%;
+      height: 290px;
+      object-fit: cover;
+      animation-fill-mode: both;
+    }
+
+    .blog-content {
+      padding: 15px;
+      text-align: center;
+    }
+
+    .blog-content h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #444;
+    }
+
+    .blog-content p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 15px;
+    }
+
+    .blog-content a {
+      display: inline-block;
+      background-color: #1bb76e;
+      color: white;
+      text-decoration: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .blog-content a:hover {
+      background-color: #148d52;
+    }
+
+    .footer {
+      background: #fff;
+      padding: 40px 20px;
+      text-align: center;
+      margin-top: 100px;
+    }
+
+    .logo {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .logo1 .i {
+      color: #6ec1e4;
+      /* Light blue 'i' */
+    }
+
+    .logo1 {
+      color: #eb6ca7;
+      margin-right: 590px;
+      /* Pink 'CREAM' */
+    }
+
+    .social-icons {
+      margin-bottom: 30px;
+    }
+
+    .social-icons a {
+      margin: 0 10px;
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      /* border: 1px solid #6ec1e4; */
+      border-radius: 50%;
+      line-height: 40px;
+      transition: background 0.3s;
+    }
+
+    .social-icons img {
+      width: 20px;
+      height: 20px;
+      margin-top: 10px;
+    }
+
+    /* .social-icons a:hover {
+      background: #6ec1e4;
+    } */
+
+    .info {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .info h2 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .info p {
+      margin: 5px 0;
+      color: #666;
+    }
+
+    .copyright {
+      font-size: 0.9rem;
+      color: #999;
+    }
+
+    .copyright span {
+      color: #eb6ca7;
+    }
+
+  </style>
+</head>
+<body>
+
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="left-links">
+      <a href="#">FAQs</a> |
+      <a href="#">Help</a> |
+      <a href="#">Support</a>
+    </div>
+    <div class="right-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="/Wishlist"><i class="fa-solid fa-heart"></i></a>
+      <!--<i class="fa-solid fa-cart-shopping"></i>-->
+      <a href="/login"><i class="fa-solid fa-user" style="color: white;"></i></a>
+      <a href="/Cart" alt="Cart" id="cartIcon" class="cart-icon"><i class="fa-solid fa-cart-shopping"></i></a>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <nav>
+      <ul class="nav-links">
+        <li><a class="active" href="/">Home</a></li>
+        <li><a href="/About">About</a></li>
+        <li><a href="/Product">Product</a></li>
+      </ul>
+      <div class="logo">i<span>CREAM</span></div>
+      <ul class="nav-links">
+        <li><a href="/Blog">Blogs</a></li>
+        <li><a href="/Gallery">Gallery</a></li>
+        <li><a href="/Contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <div class="head">
+    <div class="breadcrumb">Home > Blog</div>
+    <h1>BLOG</h1>
+  </div>
+
+  <div class="blog-container">
+
+    <div class="blog-card">
+      <img src="/static/img/blog.jpg" alt="Mulberry Ice Cream">
+      <div class="blog-content">
+        <h3>Mulberry: From Maharashtra</h3>
+        <p>Berry lovers rejoice: Discover Naturals' best ice creams at the festival!</p>
+        <a href="/Blog_detail?id=mulberry">View Blog</a>
+      </div>
+    </div>
+
+    <div class="blog-card">
+      <img src="/static/img/blog3.jpeg" alt="Gooseberry Ice Cream">
+      <div class="blog-content">
+        <h3>Gooseberry: From Uttar Pradesh</h3>
+        <p>Must-try berry ice creams at the 2025 Festival!</p>
+        <a href="/Blog_detail?id=gooseberry">View Blog</a>
+      </div>
+    </div>
+
+    <div class="blog-card">
+      <img src="/static/img/blog5.jpeg" alt="Berry Mix Ice Cream">
+      <div class="blog-content">
+        <h3>Top 5 Berry Ice Cream Flavours</h3>
+        <p>You can't miss these at the Naturals store.</p>
+        <a href="/Blog_detail?id=blueberry">View Blog</a>
+      </div>
+    </div>
+
+    <div class="blog-card">
+      <img src="/static/img/blog4.jpg" alt="Black Currant">
+      <div class="blog-content">
+        <h3>Black Currant: From Poland</h3>
+        <p>Why this berry ice cream steals the show at Naturals' event.</p>
+        <a href="/Blog_detail?id=blackcurrant">View Blog</a>
+      </div>
+    </div>
+  
+    <div class="blog-card">
+      <img src="/static/img/blog6.webp" alt="Rose Walnut Ice Cream">
+      <div class="blog-content">
+        <h3>Rose Walnut: Pure Mix</h3>
+        <p>A flavour combination you must try this season.</p>
+        <a href="/Blog_detail?id=rosewalnut">View Blog</a>
+      </div>
+    </div>
+  
+    <div class="blog-card">
+      <img src="/static/img/blog7.jpeg" alt="Floral Ice Cream">
+      <div class="blog-content">
+        <h3>Floral & Nutty Blend</h3>
+        <p>Discover rose walnut ice cream magic.</p>
+        <a href="/Blog_detail?id=floralnutty">View Blog</a>
+      </div>
+    </div>
+  
+    <div class="blog-card">
+      <img src="/static/img/blog8.png" alt="Black Grapes Ice Cream">
+      <div class="blog-content">
+        <h3>Black Grapes: Winter Favorite</h3>
+        <p>Seasonal blues cured by Naturals' black grapes ice cream.</p>
+        <a href="/Blog_detail?id=blackgrapes">View Blog</a>
+      </div>
+    </div>
+  
+    <div class="blog-card">
+      <img src="/static/img/cotton.jpg" alt="Gajar Halwa Ice Cream">
+      <div class="blog-content">
+        <h3>Cotton Candy: Childhood in a Cone</h3>
+        <p>Fairground magic swirled into a scoop of pink sweetness.</p>
+        <a href="/Blog_detail?id=cottoncandy">View Blog</a>
+      </div>
+    </div>
+  
+    <div class="blog-card">
+      <img src="/static/img/chocolate1.jpg" alt="Gajar Halwa">
+      <div class="blog-content">
+        <h3>Chocolate: The Evergreen Indulgence</h3>
+        <p>Rich, velvety chocolate that comforts in every season.</p>
+        <a href="/Blog_detail?id=chocolate">View Blog</a>
+      </div>
+    </div>
+
+    <!-- Footer Section -->
+  <footer class="footer">
+    <div class="container">
+      <h1 class="logo1"><span class="i">i</span>CREAM</h1>
+
+      <div class="social-icons">
+        <a href="#"><img src="https://img.icons8.com/ios-glyphs/30/twitter--v1.png" alt="Twitter" /></a>
+        <a href="#"><img src="https://img.icons8.com/ios-glyphs/30/facebook-new.png" alt="Facebook" /></a>
+        <a href="#"><img src="https://img.icons8.com/ios-glyphs/30/linkedin.png" alt="LinkedIn" /></a>
+        <a href="#"><img src="https://img.icons8.com/ios-glyphs/30/instagram-new.png" alt="Instagram" /></a>
+      </div>
+
+      <div class="info">
+        <div>
+          <h2>Get In Touch</h2>
+          <p>123 Street, New York, USA</p>
+          <p>+012 345 67890</p>
+        </div>
+        <div>
+          <h2>Opening Hours</h2>
+          <p>Mon – Sat, 8AM – 5PM</p>
+          <p>Sunday: Closed</p>
+        </div>
+      </div>
+
+      <p class="copyright">
+        © Domain. All Rights Reserved. Designed by <span>HTML Codex</span>
+      </p>
+    </div>
+  </footer>
+
+  </div>
+
+</body>
+</html>

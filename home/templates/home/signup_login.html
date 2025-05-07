@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="{% static 'css/Login_signup.css' %}">
+	<title>Ice Cream Login & Sign Up</title>
+</head>
+
+<body>
+	<div class="container" id="container">
+
+		<!-- SIGN UP FORM -->
+		<div class="form-container sign-up-container">
+			<!-- FIXED FORM TAG -->
+            <form method="POST" action="{% url 'signup' %}" autocomplete="off">
+				{% csrf_token %}
+				<h1>Create Account</h1>
+				<hr>
+				<input type="text" name="first_name" placeholder="First Name" required />
+				<input type="text" name="last_name" placeholder="Last Name" required />
+				<input type="email" name="email" placeholder="Email" required />
+				<input type="password" name="password" placeholder="Password" required />
+				<input type="password" name="confirm_password" placeholder="Confirm Password" required />
+				<button type="submit">Sign Up</button>
+			</form>
+		</div>
+
+		<!-- LOGIN FORM -->
+<div class="form-container sign-in-container">
+    {% if user.is_authenticated %}
+        <div style="text-align: center;">
+            <h2>You're already logged in!</h2>
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
+    {% else %}
+        <form method="POST" action="{% url 'login' %}" autocomplete="off">
+            {% csrf_token %}
+            <h1>Login</h1>
+            <hr>
+            <input type="email" name="email" placeholder="Email" required />
+            <input type="password" name="password" placeholder="Password" required />
+            <a href="#">Forgot your password?</a>
+            <button type="submit">Sign In</button>
+        </form>
+    {% endif %}
+</div>
+
+
+		<!-- Overlay Section -->
+		<div class="overlay-container">
+			<div class="overlay">
+				<div class="overlay-panel overlay-left">
+					<h1 style="color: rgb(243, 248, 248);">Welcome Back 🍦</h1>
+					<p>Login to your scoops!</p>
+					<button class="ghost" id="signIn">Sign In</button>
+				</div>
+				<div class="overlay-panel overlay-right">
+					<h1 style="color: rgb(243, 248, 248);">Hello, Friend!</h1>
+					<p>Enter your personal details and start your journey with us 🍨</p>
+					<button class="ghost" id="signUp">Sign Up</button>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script>
+		const signUpButton = document.getElementById('signUp');
+		const signInButton = document.getElementById('signIn');
+		const container = document.getElementById('container');
+
+		signUpButton.addEventListener('click', () => {
+			container.classList.add("right-panel-active");
+		});
+
+		signInButton.addEventListener('click', () => {
+			container.classList.remove("right-panel-active");
+		});
+	</script>
+</body>
+</html>

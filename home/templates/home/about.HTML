@@ -1,0 +1,393 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <title>About Us - iCREAM</title>
+  <link rel="stylesheet" href="{% static 'css/about.css' %}" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    background: url("../static/img/blog_new.jpg") no-repeat center center/cover;
+    color: #333;
+  }
+  
+  /* Top Bar */
+  .top-bar {
+    background: #f9a9c4;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: white;
+    align-items: center;
+    height: 100px;
+  }
+
+  .top-bar a {
+    color: white;
+    margin: 0 0.5rem;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .left-links a::after {
+    content: "";
+  }
+
+  .right-icons a {
+    margin-left: 10px;
+    font-size: 16px;
+    /* or maybe 20px depending on what you want */
+    color: white;
+  }
+
+  .cart-icon a {
+    margin-left: 10px;
+    font-size: 16px;
+    /* or maybe 20px depending on what you want */
+    color: white;
+  }
+
+  #cartIcon {
+    position: relative;
+    display: inline-block;
+  }
+
+
+  /* Navigation Bar */
+  .navbar {
+    background: white;
+    border-radius: 40px;
+    padding: 1.2rem 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    width: 90%;
+    max-width: 1200px;
+    margin: -40px auto 0;
+    z-index: 10;
+    position: relative;
+    height: 50px;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin-top: 10px;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    font-size: 15px;
+    transition: color 0.3s ease;
+  }
+
+  .nav-links a.active,
+  .nav-links a:hover {
+    color: #f57aa7;
+  }
+
+  .logo {
+    font-size: 50px;
+    font-weight: 700;
+    color: #40cbee;
+    margin-top:-10px;
+  }
+
+  .logo span {
+    color: #f57aa7;
+  }
+  
+  .about-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 60px 80px;
+    gap: 40px;
+    background-size: contain;
+  }
+  
+  .text-content {
+    max-width: 600px;
+  }
+  
+  .text-content h1 {
+    font-size: 36px;
+    color: #e94e77;
+    margin-bottom: 20px;
+  }
+  
+  .text-content h2 {
+    margin-top: 30px;
+    font-size: 22px;
+    color: #222;
+  }
+  
+  .text-content ul {
+    list-style: none;
+    padding: 0;
+    font-size: 16px;
+  }
+  
+  .text-content ul li {
+    margin: 10px 0;
+  }
+
+  /*.image-content img {
+    max-width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    margin-left:650px;
+    display: flex;
+  } */
+
+  .image-content {
+    display: flex;
+    justify-content: center;
+    gap: 100px; 
+    margin-top: 100px;
+  }
+  
+  .image-content img {
+    max-width: 300px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    
+  }
+  .top-right-images {
+    position: absolute;
+    top: 220px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .top-right-images img {
+    max-width: 500px;
+    border-radius: 5px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+
+  .quote {
+    width: max-content;
+    font-style: italic;
+    text-align: center;
+    margin: 2rem 0 0;
+    padding: 1rem;
+    font-family: 'Pacifico', cursive;
+    color: #d63384;
+    font-size:34px;
+  }
+  
+  .footer {
+    background: #fff;
+    padding: 40px 20px;
+    text-align: center;
+    margin-top: 80px;
+  }
+
+  .logo {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .logo .i {
+    color: #6ec1e4;
+    /* Light blue 'i' */
+  }
+
+  .logo {
+    color: #eb6ca7;
+    /* Pink 'CREAM' */
+  }
+
+  .social-icons {
+    margin-bottom: 30px;
+  }
+
+  .social-icons a {
+    margin: 0 10px;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    /* border: 1px solid #6ec1e4; */
+    border-radius: 50%;
+    line-height: 40px;
+    transition: background 0.3s;
+  }
+
+  .social-icons img {
+    width: 20px;
+    height: 20px;
+    margin-top: 10px;
+  }
+
+  /* .social-icons a:hover {
+    background: #6ec1e4;
+  } */
+
+  .info {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+  }
+
+  .info h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  .info p {
+    margin: 5px 0;
+    color: #666;
+  }
+
+  .copyright {
+    font-size: 0.9rem;
+    color: #999;
+  }
+
+  .copyright span {
+    color: #eb6ca7;
+  }
+  </style>
+</head>
+<body>
+   <!-- Top Bar -->
+   <div class="top-bar">
+    <div class="left-links">
+      <a href="#">FAQs</a> |
+      <a href="#">Help</a> |
+      <a href="#">Support</a>
+    </div>
+    <div class="right-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <!--<a href="#"><i class="fab fa-linkedin-in"></i></a>-->
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <!--<a href="#"><i class="fab fa-youtube"></i></a>-->
+      <a href="/Wishlist"><i class="fa-solid fa-heart"></i></a>
+      <!--<i class="fa-solid fa-cart-shopping"></i>-->
+      <a href="/login"><i class="fa-solid fa-user" style="color: white;"></i></a>
+      <a href="/Cart" alt="Cart" id="cartIcon" class="cart-icon"><i class="fa-solid fa-cart-shopping"></i></a>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <nav>
+      <ul class="nav-links">
+        <li><a class="active" href="/">Home</a></li>
+        <li><a href="/About">About</a></li>
+        <li><a href="/Product">Product</a></li>
+      </ul>
+      <div class="logo">i<span>CREAM</span></div>
+      <ul class="nav-links">
+        <li><a href="/Blog">Blogs</a></li>
+        <li><a href="/Gallery">Gallery</a></li>
+        <li><a href="/Contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="about-section">
+    <section class="text-content">
+      <h1>ABOUT US</h1>
+      <p>
+        At <strong>iCREAM</strong>, we’re not just about frozen treats — we’re about creating moments of happiness.
+        Founded with a passion for quality, creativity, and unforgettable flavor, our journey began with a simple
+        idea: to craft ice cream that brings smiles, stirs memories, and spreads joy.
+      </p>
+      <p>
+        We believe dessert should be delightful, vibrant, and fun – just like life! From fruity popsicles to
+        creamy classics, every product is made with real ingredients, love, and a dash of innovation.
+      </p>
+
+      <h2>What Makes Us Special?</h2>
+      <ul>
+        <li>🍓 <strong>Real Ingredients</strong> – Fresh fruits, natural flavors, and high-quality dairy.</li>
+        <li>❄️<strong>Crafted with Care</strong> – Handmade with precision and passion.</li>
+        <li>🌈 <strong>For Every Mood</strong> – From nostalgic flavors to exciting new twists.</li>
+        <li>❤️ <strong>Community Love</strong> – Locally made, community supported.</li>
+      </ul>
+
+      <h2>Our Mission</h2>
+      <p>
+        To create the most joyful, flavor-packed ice cream experiences — while staying true to our values of
+        honesty, freshness, and fun.
+      </p>
+
+      <h2>Our Promise to You</h2>
+      <p>
+       We promise to always serve up delicious, high-quality ice cream that’s made responsibly, locally, and creatively. We’re here to make dessert exciting again — the way it was meant to be.
+      </p>
+
+      <h2>Let’s Chill Together!</h2>
+      <p>
+      Visit us in-store or order online to experience the joy of <strong>iCREAM</strong>. Be it a cozy solo moment or a party with friends, we’ve got something to sweeten your day.
+      </p>
+
+      <section class="image-content">
+        <div class="top-right-images">
+          <img src="/static/img/about1.jpg" alt="Ice Cream 1" />
+          <img src="/static/img/about2.jpg" alt="Ice Cream 2" />
+        </div>
+      </section>
+      <br><br>
+      <p class="quote">
+        “Life is too short to skip dessert. Make it colorful, make it creamy, make it count!”
+        </p>
+      
+    </section>
+
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="container">
+      <h1 class="logo"><span class="i">i</span>CREAM</h1>
+
+      <div class="social-icons">
+        <a href="#"><img src="https://img.icons8.com/ios-glyphs/30/twitter--v1.png" alt="Twitter" /></a>
+        <a href="#"><img src="https://img.icons8.com/ios-glyphs/30/facebook-new.png" alt="Facebook" /></a>
+        <a href="#"><img src="https://img.icons8.com/ios-glyphs/30/linkedin.png" alt="LinkedIn" /></a>
+        <a href="#"><img src="https://img.icons8.com/ios-glyphs/30/instagram-new.png" alt="Instagram" /></a>
+      </div>
+
+      <div class="info">
+        <div>
+          <h2>Get In Touch</h2>
+          <p>123 Street, New York, USA</p>
+          <p>+012 345 67890</p>
+        </div>
+        <div>
+          <h2>Opening Hours</h2>
+          <p>Mon – Sat, 8AM – 5PM</p>
+          <p>Sunday: Closed</p>
+        </div>
+      </div>
+
+      <p class="copyright">
+        © Domain. All Rights Reserved. Designed by <span>HTML Codex</span>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>

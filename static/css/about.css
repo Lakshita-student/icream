@@ -1,0 +1,256 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    background: url("../static/img/blog_new.jpg") no-repeat center center/cover;
+    color: #333;
+  }
+  
+  /* Top Bar */
+  .top-bar {
+    background: #f9a9c4;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: white;
+    align-items: center;
+    height: 100px;
+  }
+
+  .top-bar a {
+    color: white;
+    margin: 0 0.5rem;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .left-links a::after {
+    content: "";
+  }
+
+  .right-icons a {
+    margin-left: 10px;
+    font-size: 16px;
+    /* or maybe 20px depending on what you want */
+    color: white;
+  }
+
+  .cart-icon a {
+    margin-left: 10px;
+    font-size: 16px;
+    /* or maybe 20px depending on what you want */
+    color: white;
+  }
+
+  #cartIcon {
+    position: relative;
+    display: inline-block;
+  }
+
+
+  /* Navigation Bar */
+  .navbar {
+    background: white;
+    border-radius: 40px;
+    padding: 1.2rem 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    width: 90%;
+    max-width: 1200px;
+    margin: -40px auto 0;
+    z-index: 10;
+    position: relative;
+    height: 50px;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin-top: 10px;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    font-size: 15px;
+    transition: color 0.3s ease;
+  }
+
+  .nav-links a.active,
+  .nav-links a:hover {
+    color: #f57aa7;
+  }
+
+  .logo {
+    font-size: 50px;
+    font-weight: 700;
+    color: #40cbee;
+    margin-top:-10px;
+  }
+
+  .logo span {
+    color: #f57aa7;
+  }
+  
+  .about-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 60px 80px;
+    gap: 40px;
+    background-size: contain;
+  }
+  
+  .text-content {
+    max-width: 600px;
+  }
+  
+  .text-content h1 {
+    font-size: 36px;
+    color: #e94e77;
+    margin-bottom: 20px;
+  }
+  
+  .text-content h2 {
+    margin-top: 30px;
+    font-size: 22px;
+    color: #222;
+  }
+  
+  .text-content ul {
+    list-style: none;
+    padding: 0;
+    font-size: 16px;
+  }
+  
+  .text-content ul li {
+    margin: 10px 0;
+  }
+
+  /*.image-content img {
+    max-width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    margin-left:650px;
+    display: flex;
+  } */
+
+  .image-content {
+    display: flex;
+    justify-content: center;
+    gap: 100px; 
+    margin-top: 100px;
+  }
+  
+  .image-content img {
+    max-width: 300px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    
+  }
+  .top-right-images {
+    position: absolute;
+    top: 220px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .top-right-images img {
+    max-width: 500px;
+    border-radius: 5px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+
+  .quote {
+    width: max-content;
+    font-style: italic;
+    text-align: center;
+    margin: 2rem 0 0;
+    padding: 1rem;
+    font-family: 'Pacifico', cursive;
+    color: #d63384;
+    font-size:34px;
+  }
+  
+  .footer {
+    background: #fff;
+    padding: 40px 20px;
+    text-align: center;
+    margin-top: 80px;
+  }
+
+  .logo {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .logo .i {
+    color: #6ec1e4;
+    /* Light blue 'i' */
+  }
+
+  .logo {
+    color: #eb6ca7;
+    /* Pink 'CREAM' */
+  }
+
+  .social-icons {
+    margin-bottom: 30px;
+  }
+
+  .social-icons a {
+    margin: 0 10px;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    /* border: 1px solid #6ec1e4; */
+    border-radius: 50%;
+    line-height: 40px;
+    transition: background 0.3s;
+  }
+
+  .social-icons img {
+    width: 20px;
+    height: 20px;
+    margin-top: 10px;
+  }
+
+  /* .social-icons a:hover {
+    background: #6ec1e4;
+  } */
+
+  .info {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+  }
+
+  .info h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  .info p {
+    margin: 5px 0;
+    color: #666;
+  }
+
+  .copyright {
+    font-size: 0.9rem;
+    color: #999;
+  }
+
+  .copyright span {
+    color: #eb6ca7;
+  }

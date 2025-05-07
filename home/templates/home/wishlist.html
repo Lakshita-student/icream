@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wishlist</title>
+   <!-- Font Awesome -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+   <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      
+    }
+
+    body {
+  background-image: url('../static/img/wishlist4.jpg'); /* Replace with your image path */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  height:5px;
+}
+
+
+    /* Top Bar */
+    .top-bar {
+      background: #f9a9c4;
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: white;
+      align-items: center;
+      height: 100px;
+    }
+
+    .top-bar a {
+      color: white;
+      margin: 0 0.5rem;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .left-links a::after {
+      content: "";
+    }
+
+    .right-icons a {
+      margin-left: 10px;
+      font-size: 16px;
+      /* or maybe 20px depending on what you want */
+      color: white;
+    }
+
+    .cart-icon a {
+      margin-left: 10px;
+      font-size: 16px;
+      /* or maybe 20px depending on what you want */
+      color: white;
+    }
+
+    #cartIcon {
+      position: relative;
+      display: inline-block;
+    }
+
+
+    /* Navigation Bar */
+    .navbar {
+      background: white;
+      border-radius: 40px;
+      padding: 1.2rem 2rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+      width: 90%;
+      max-width: 1200px;
+      margin: -40px auto 0;
+      z-index: 10;
+      position: relative;
+      height: 90px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      margin-top: -10px;
+
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      font-size: 15px;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a.active,
+    .nav-links a:hover {
+      color: #f57aa7;
+    }
+
+    .logo {
+      font-size: 50px;
+      font-weight: 700;
+      color: #40cbee;
+    }
+
+    .logo span {
+      color: #f57aa7;
+    }
+    h1{
+        margin-top: 20px;
+    }
+
+    .wishlist-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+    }
+    .product-card {
+      border: 1px solid #ddd;
+      padding: 10px;
+      width: 200px;
+      text-align: center;
+      border-radius: 10px;
+    }
+    .product-card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .remove-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+    .remove-btn:hover {
+    background-color: darkred;
+  }
+  </style>
+</head>
+<body>
+
+    <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="left-links">
+      <a href="#">FAQs</a> |
+      <a href="#">Help</a> |
+      <a href="#">Support</a>
+    </div>
+    <div class="right-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="wishlist.html"><i class="fa-solid fa-heart"></i></a>
+      <!--<i class="fa-solid fa-cart-shopping"></i>-->
+      <a href="/login"><i class="fa-solid fa-user" style="color: white;"></i></a>
+      <a href="cart.html" alt="Cart" id="cartIcon" class="cart-icon"><i class="fa-solid fa-cart-shopping"></i></a>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <nav>
+      <ul class="nav-links" id="nav-links">
+        <li><a class="active" href="/">Home</a></li>
+        <li><a href="/About">About</a></li>
+        <li><a href="/Product">Product</a></li>
+      </ul>
+      <div class="logo" style="color:#40cbee">i<span>CREAM</span></div>
+      <ul class="nav-links">
+        <li><a href="/Blog">Blogs</a></li>
+        <li><a href="/Gallery">Gallery</a></li>
+        <li><a href="/Contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <h1 style="text-align:center;">My Wishlist</h1>
+  <div class="wishlist-container" id="wishlistContainer"></div>
+
+
+  <script>
+    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+const container = document.getElementById("wishlistContainer");
+
+function renderWishlist() {
+  if (wishlist.length === 0) {
+    container.innerHTML = "<p>No items in wishlist.</p>";
+    return;
+  }
+
+  container.innerHTML = wishlist.map(p => `
+    <div class="product-card" data-id="${p.id}">
+      <img src="${p.img}" alt="${p.title}">
+      <h3>${p.title}</h3>
+      <p>${p.price}</p>
+      <a href="/Product?id=${p.id}">View Product</a>
+      <br>
+      <button class="remove-btn" onclick="removeFromWishlist(${p.id})" style="color:white;background-color:red;margin-top:5px;">Remove</button>
+    </div>
+  `).join("");
+}
+
+function removeFromWishlist(id) {
+  wishlist = wishlist.filter(p => p.id !== id);
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  renderWishlist(); // re-render after removal
+}
+
+renderWishlist();
+
+  </script>
+</body>
+</html>

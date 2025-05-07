@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ice Cream Gallery</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #fffaf7;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      background: #f9a9c4;
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: white;
+      align-items: center;
+      height: 100px;
+    }
+
+    .top-bar a {
+      color: white;
+      margin: 0 0.5rem;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .left-links a::after {
+      content: "";
+    }
+
+    .right-icons a {
+      margin-left: 10px;
+      font-size: 16px;
+      /* or maybe 20px depending on what you want */
+      color: white;
+    }
+
+    .cart-icon a {
+      margin-left: 10px;
+      font-size: 16px;
+      /* or maybe 20px depending on what you want */
+      color: white;
+    }
+
+    #cartIcon {
+      position: relative;
+      display: inline-block;
+    }
+
+
+    /* Navigation Bar */
+    .navbar {
+      background: white;
+      border-radius: 40px;
+      padding: 1.2rem 2rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+      width: 90%;
+      max-width: 1200px;
+      margin: -40px auto 0;
+      z-index: 10;
+      position: relative;
+      height: 50px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      margin-top: 5px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      font-size: 15px;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a.active,
+    .nav-links a:hover {
+      color: #f57aa7;
+    }
+
+    .logo {
+      font-size: 50px;
+      font-weight: 700;
+      color: #40cbee;
+      margin-top: 10px;
+    }
+
+    .logo span {
+      color: #f57aa7;
+    }
+
+    .head {
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    .filter-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .filter-btn {
+      padding: 10px 20px;
+      margin: 5px;
+      border: none;
+      border-radius: 20px;
+      background-color: #f8cfcf;
+      cursor: pointer;
+    }
+
+    .filter-btn.active {
+      background-color: #f06292;
+      color: #fff;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 0 20px 40px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .gallery-item {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .image{
+      width: 100%;
+      border-radius: 10px;
+      display: block;
+    }
+
+    .hover-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(255,255,255,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .gallery-item:hover .hover-overlay {
+      opacity: 1;
+    }
+
+    .plus-icon {
+      font-size: 40px;
+      color: #f06292;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+    }
+
+    .modal-content img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .modal .close,
+    .modal .prev,
+    .modal .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      font-size: 36px;
+      padding: 10px;
+      cursor: pointer;
+      background: rgba(0,0,0,0.4);
+      border-radius: 50%;
+      user-select: none;
+      transition: background 0.3s ease;
+    }
+
+    .modal .close {
+      top: 20px;
+      right: 20px;
+      transform: none;
+      font-size: 30px;
+    }
+
+    .modal .prev {
+      left: 10px;
+    }
+
+    .modal .next {
+      right: 10px;
+    }
+
+    .modal .prev:hover,
+    .modal .next:hover,
+    .modal .close:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    @media (max-width: 600px) {
+      .modal .prev, .modal .next {
+        font-size: 28px;
+        padding: 8px;
+      }
+    }
+
+
+    .footer {
+      background: #fff;
+      padding: 40px 20px;
+      text-align: center;
+      margin-top: 100px;
+    }
+
+    .logo {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .logo .i {
+      color: #6ec1e4;
+      /* Light blue 'i' */
+    }
+
+    .logo {
+      color: #eb6ca7;
+      /* Pink 'CREAM' */
+    }
+
+    .social-icons {
+      margin-bottom: 30px;
+    }
+
+    .social-icons a {
+      margin: 0 10px;
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      /* border: 1px solid #6ec1e4; */
+      border-radius: 50%;
+      line-height: 40px;
+      transition: background 0.3s;
+    }
+
+    .social-icons img {
+      width: 20px;
+      height: 20px;
+      margin-top: 10px;
+    }
+
+    /* .social-icons a:hover {
+      background: #6ec1e4;
+    } */
+
+    .info {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .info h2 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .info p {
+      margin: 5px 0;
+      color: #666;
+    }
+
+    .copyright {
+      font-size: 0.9rem;
+      color: #999;
+    }
+
+    .copyright span {
+      color: #eb6ca7;
+    }
+    
+
+    .modal-img {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 10px;
+  display: block;
+  margin: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.modal-content {
+  position: relative;
+  text-align: center;
+}
+
+.close, .prev, .next {
+  cursor: pointer;
+  color: white;
+  font-size: 30px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  user-select: none;
+}
+
+.close {
+  top: 10px;
+  right: 20px;
+  font-size: 40px;
+  transform: none;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="left-links">
+      <a href="#">FAQs</a> |
+      <a href="#">Help</a> |
+      <a href="#">Support</a>
+    </div>
+    <div class="right-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="wishlist.html"><i class="fa-solid fa-heart"></i></a>
+      <!--<i class="fa-solid fa-cart-shopping"></i>-->
+      <a href="/login"><i class="fa-solid fa-user" style="color: white;"></i></a>
+      <a href="cart.html" alt="Cart" id="cartIcon" class="cart-icon"><i class="fa-solid fa-cart-shopping"></i></a>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <nav>
+      <ul class="nav-links" id="nav-links">
+        <li><a class="active" href="/">Home</a></li>
+        <li><a href="/About">About</a></li>
+        <li><a href="/Product">Product</a></li>
+      </ul>
+      <div class="logo" style="color:#40cbee">i<span>CREAM</span></div>
+      <ul class="nav-links">
+        <li><a href="/Blog">Blogs</a></li>
+        <li><a href="/Gallery">Gallery</a></li>
+        <li><a href="/Contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="head">
+    <h1>Delicious Ice Cream</h1>
+    <h1>Made From Our Very</h1>
+    <h1>Own Organic Milk</h1>
+  </div>
+
+  <div class="filter-container">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="cone">Cone</button>
+    <button class="filter-btn" data-filter="vanilla">Vanilla</button>
+    <button class="filter-btn" data-filter="chocolate">Chocolate</button>
+  </div>
+
+  <div class="gallery">
+    <div class="gallery-item" data-category="all" data-images='["/static/img/icecream1.jpg", "/static/img/mango1.jpg", "/static/img/portfolio-2.jpg", "/static/img/icecream4.jpg", "/static/img/icecream5.jpg", "/static/img/icecream6.jpg"]'>
+      <img class="image"  src="/static/img/portfolio-1.jpg" />
+      <div class="hover-overlay"><div class="plus-icon">+</div></div>
+    </div>
+    <div class="gallery-item" data-category="chocolate" data-images='["/static/img/Chocolate.png", "/static/img/chocolate1.jpg", "/static/img/chocolate3.jpg", "/static/img/chocolate4.jpg", "/static/img/chocolate5.jpg", "/static/img/chocolate6.jpg"]'>
+      <img class="image" src="/static/img/chocolate2.jpg" style="height: 220px; width:320px;" />
+      <div class="hover-overlay"><div class="plus-icon">+</div></div>
+    </div>
+    <div class="gallery-item" data-category="vanilla" data-images='["/static/img/vanilla1.jpg", "/static/img/Vanilla.png", "/static/img/vanilla2.jpg", "/static/img/vanilla4.jpg", "/static/img/vanilla5.jpg", "/static/img/vanilla6.jpg"]'>
+      <img class="image" src="/static/img/Vanilla3.jpg" style="height:220px; width:320px;"/>
+      <div class="hover-overlay"><div class="plus-icon">+</div></div>
+    </div>
+    <div class="gallery-item" data-category="cone" data-images='["/static/img/portfolio-3.jpg", "/static/img/Strawberry2.jpg", "/static/img/pistachio2.jpg", "/static/img/hazelnut2.jpg", "/static/img/bluebarry1.jpg", "/static/img/coffee3.jpg"]'>
+      <img class="image" src="/static/img/portfolio-4.jpg" />
+      <div class="hover-overlay"><div class="plus-icon">+</div></div>
+    </div>
+    <div class="gallery-item" data-category="all" data-images='["/static/img/Strawberry3.jpg", "/static/img/coconut1.jpg", "/static/img/cotton1.jpg", "/static/img/cookies.jpg", "/static/img/rosemary1.jpg", "/static/img/blueberry2.jpg"]'>
+      <img class="image" src="/static/img/portfolio-5.jpg" />
+      <div class="hover-overlay"><div class="plus-icon">+</div></div>
+    </div>
+    <div class="gallery-item" data-category="cone" data-images='["/static/img/cone1.jpg", "/static/img/cone2.jpg", "/static/img/cone3.jpg", "/static/img/cone4.jpg", "/static/img/cone5.jpg", "/static/img/cone6.jpg"]'>
+      <img class="image" src="/static/img/portfolio-6.jpg" />
+      <div class="hover-overlay"><div class="plus-icon">+</div></div>
+    </div>
+  </div>
+
+  <div class="modal" id="imageModal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div class="modal-content" id="modalGallery"></div>
+  </div>
+  
+
+
+
+
+  <!-- Modal -->
+  <div class="modal" id="imageModal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div class="modal-content">
+      <img id="modalImage" src="" />
+      <span class="prev" onclick="changeImage(-1)">&#10094;</span>
+      <span class="next" onclick="changeImage(1)">&#10095;</span>
+    </div>
+  </div>
+   <!-- Footer Section -->
+   <footer class="footer">
+    <div class="container">
+      <h1 class="logo"><span class="i">i</span>CREAM</h1>
+
+      <div class="social-icons">
+        <a href="#"><img src="https://img.icons8.com/ios-glyphs/30/twitter--v1.png" alt="Twitter" /></a>
+        <a href="#"><img src="https://img.icons8.com/ios-glyphs/30/facebook-new.png" alt="Facebook" /></a>
+        <a href="#"><img src="https://img.icons8.com/ios-glyphs/30/linkedin.png" alt="LinkedIn" /></a>
+        <a href="#"><img src="https://img.icons8.com/ios-glyphs/30/instagram-new.png" alt="Instagram" /></a>
+      </div>
+
+      <div class="info">
+        <div>
+          <h2>Get In Touch</h2>
+          <p>123 Street, New York, USA</p>
+          <p>+012 345 67890</p>
+        </div>
+        <div>
+          <h2>Opening Hours</h2>
+          <p>Mon – Sat, 8AM – 5PM</p>
+          <p>Sunday: Closed</p>
+        </div>
+      </div>
+
+      <p class="copyright">
+        © Domain. All Rights Reserved. Designed by <span>HTML Codex</span>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const modal = document.getElementById("imageModal");
+    const modalGallery = document.getElementById("modalGallery");
+    let currentIndex = 0;
+    let images = [];
+  
+    // Add click listeners to each gallery item
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('click', () => {
+        images = JSON.parse(item.getAttribute('data-images'));
+        currentIndex = 0;
+        openModal();
+      });
+    });
+  
+    // Open modal and show first image
+    function openModal() {
+      modal.style.display = "flex";
+      updateModalContent();
+    }
+  
+    // Close modal
+    function closeModal() {
+      modal.style.display = "none";
+    }
+  
+    // Change image by direction (-1 or 1)
+    function changeImage(direction) {
+      currentIndex = (currentIndex + direction + images.length) % images.length;
+      updateModalContent();
+    }
+  
+    // Update modal content to show current image
+    function updateModalContent() {
+      modalGallery.innerHTML = `
+        <img src="${images[currentIndex]}" class="modal-img" alt="Gallery Image" />
+        <span class="prev" onclick="changeImage(-1)">&#10094;</span>
+        <span class="next" onclick="changeImage(1)">&#10095;</span>
+      `;
+    }
+  
+    // Optional: close modal when clicking outside the image
+    window.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+     // Filter buttons
+  const filterButtons = document.querySelectorAll(".filter-btn");
+  const galleryItems = document.querySelectorAll(".gallery-item");
+
+  filterButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      const filter = button.getAttribute("data-filter");
+
+      galleryItems.forEach(item => {
+        const category = item.getAttribute("data-category");
+        if (filter === "all" || filter === category) {
+          item.style.display = "block";
+        } else {
+          item.style.display = "none";
+        }
+      });
+    });
+  });
+  </script>
+  
+
+  
+
+</body>
+</html>

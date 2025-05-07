@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blog</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      background: #f9a9c4;
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: white;
+      align-items: center;
+      height: 100px;
+    }
+
+    .top-bar a {
+      color: white;
+      margin: 0 0.5rem;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .left-links a::after {
+      content: "";
+    }
+
+    .right-icons a {
+      margin-left: 10px;
+      font-size: 16px;
+      /* or maybe 20px depending on what you want */
+      color: white;
+    }
+
+    .cart-icon a {
+      margin-left: 10px;
+      font-size: 16px;
+      /* or maybe 20px depending on what you want */
+      color: white;
+    }
+
+    #cartIcon {
+      position: relative;
+      display: inline-block;
+    }
+
+
+    /* Navigation Bar */
+    .navbar {
+      background: white;
+      border-radius: 40px;
+      padding: 1.2rem 2rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+      width: 90%;
+      max-width: 1200px;
+      margin: -40px auto 0;
+      z-index: 10;
+      position: relative;
+      height: 90px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      margin-top: -20px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      font-size: 15px;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a.active,
+    .nav-links a:hover {
+      color: #f57aa7;
+    }
+
+    .logo {
+      font-size: 50px;
+      font-weight: 700;
+      color: #40cbee;
+    }
+
+    .logo span {
+      color: #f57aa7;
+    }
+
+    /* General reset and font */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fffdf9;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Container styling */
+.blog-container {
+  margin: 60px auto;
+  padding: 20px;
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.06);
+  border-radius: 12px;
+  background: url("../static/img/wishlist4.jpg") no-repeat center center/cover;
+}
+
+/* Title styling */
+#blog-title {
+  font-size: 2.5rem;
+  color: #111;
+  margin-bottom: 20px;
+  font-weight: 700;
+  margin-left: 350px;
+}
+
+/* Image styling */
+#blog-img {
+  max-width: 100%;
+  height: 50%;
+  width:30%;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-left: 450px;
+  animation-fill-mode: both;
+}
+
+#blog-img:hover{
+    animation: pulse 1s; 
+}
+
+/* Paragraphs and text */
+#blog-content p {
+  font-size: 1.1rem;
+  margin-bottom: 18px;
+}
+
+/* Headings inside blog content */
+#blog-content h2, #blog-content h3 {
+  margin-top: 30px;
+  font-size: 1.6rem;
+  color: #555;
+}
+
+/* Lists */
+#blog-content ul {
+  margin-left: 20px;
+  padding-left: 10px;
+}
+
+#blog-content ul li {
+  margin-bottom: 8px;
+  font-size: 1.05rem;
+}
+
+/* Emphasis */
+#blog-content em {
+  font-style: italic;
+  color: #8a2be2;
+}
+
+#blog-content strong {
+  font-weight: bold;
+  color: #444;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .blog-container {
+    margin: 20px 15px;
+    padding: 15px;
+  }
+
+  #blog-title {
+    font-size: 2rem;
+  }
+
+  #blog-content p {
+    font-size: 1rem;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+    <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="left-links">
+      <a href="#">FAQs</a> |
+      <a href="#">Help</a> |
+      <a href="#">Support</a>
+    </div>
+    <div class="right-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="/Wishlist"><i class="fa-solid fa-heart"></i></a>
+      <!--<i class="fa-solid fa-cart-shopping"></i>-->
+      <a href="/login"><i class="fa-solid fa-user" style="color: white;"></i></a>
+      <a href="/Cart" alt="Cart" id="cartIcon" class="cart-icon"><i class="fa-solid fa-cart-shopping"></i></a>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <nav>
+      <ul class="nav-links">
+        <li><a class="active" href="/">Home</a></li>
+        <li><a href="/About">About</a></li>
+        <li><a href="/Product">Product</a></li>
+      </ul>
+      <div class="logo">i<span>CREAM</span></div>
+      <ul class="nav-links">
+        <li><a href="/Blog">Blogs</a></li>
+        <li><a href="/Gallery">Gallery</a></li>
+        <li><a href="/Contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="blog-container">
+    <h1 id="blog-title">Loading...</h1>
+    <img id="blog-img" src="" alt="Blog image" />
+    <div id="blog-content"></div>
+  </div>
+
+  <script>
+    const blogData = {
+  gooseberry: {
+    title: "Gooseberry: From Uttar Pradesh",
+    image: "/static/img/blog3.jpeg",
+    content: `
+      <p><em>There’s a berry-good chance</em> you’re missing out on one of the most exciting celebrations of the year! <strong>Naturals’ Berry Festival</strong> is back — a delicious tradition bringing together the best berry flavors from around the country.</p>
+  
+    <p><strong>The Berry Festival</strong> is a tribute to berries known for their balance of sweetness and tartness. We use just three simple ingredients – milk, sugar, and seasonal fruits – staying true to our philosophy of keeping things pure, simple, and local.</p>
+  
+    <h2>From Farms in Uttar Pradesh to Your Scoop</h2>
+  
+    <p>Our gooseberries come straight from the heartland — Uttar Pradesh. These berries are carefully picked and processed with love to preserve their natural zing. With a light green hue and a bold, tangy punch, Gooseberry Ice Cream is unlike anything you’ve tried before.</p>
+  
+    <ul>
+      <li><strong>Color:</strong> Pale green with hints of gold</li>
+      <li><strong>Flavor profile:</strong> Tart, tangy, refreshing</li>
+      <li><strong>Pairs well with:</strong> Honey drizzle, pistachios, or a hint of mint</li>
+    </ul>
+  
+    <h2>Why You’ll Love It</h2>
+  
+    <p>Our Gooseberry flavor is crafted for those who love to explore bold, fruity ice creams. The sharp tanginess of amla is mellowed by creamy milk, making it a perfect blend of traditional and modern dessert culture.</p>
+  
+    <p><strong>Hurry!</strong> This limited-edition scoop is only available during the Berry Festival 2025. Visit your nearest outlet or order online before it’s gone!</p>
+    `
+  },
+  mulberry: {
+    title: "Mulberry: From Maharashtra",
+    image: "/static/img/blog.jpg",
+    content: `
+      <p><em>The richness of the Deccan Plateau</em> is now served in a scoop! Mulberry, one of Maharashtra’s finest fruits, finds its way into our latest festival sensation.</p>
+
+      <p><strong>Mulberry Ice Cream</strong> is a flavor journey — jammy, rich, and slightly tangy. Made from deep-purple berries sourced from local farms, this flavor is a hit among those who love a berry-forward bite with a velvety texture.</p>
+
+      <h2>Fresh from Maharashtra’s Deccan Plateau</h2>
+
+      <p>We work closely with farmers in the plateau region to harvest ripe, juicy mulberries at their peak. These berries are naturally sweet, making them perfect for ice creams without heavy sweeteners.</p>
+
+      <ul>
+        <li><strong>Color:</strong> Deep purple with ruby tones</li>
+        <li><strong>Flavor profile:</strong> Bold, slightly tart, berry-jam like</li>
+        <li><strong>Pairs well with:</strong> Vanilla, dark chocolate, or almond crumble</li>
+      </ul>
+
+      <h2>Why You’ll Love It</h2>
+
+      <p>If you love fruity richness in your desserts, Mulberry Ice Cream will be your new go-to. It’s comforting yet adventurous, nostalgic yet modern — everything a festival flavor should be.</p>
+
+      <p><strong>Limited stock alert!</strong> Taste the magic before it melts away after the festival ends.</p>
+    `
+  },
+
+  blueberry: {
+    title: "Blueberry Delight: Fresh from the Farms of the USA",
+    image: "/static/img/blog5.jpeg",
+    content: `
+      <p><em>Say hello to international flair</em> with our premium Blueberry Ice Cream, made using imported berries straight from the USA. These plump berries bring just the right mix of sweet and tangy goodness.</p>
+
+      <p><strong>Blueberry Ice Cream</strong> is a smooth, vibrant flavor designed for sophisticated palates and berry lovers alike. Its light violet color and creamy bite make it a treat to both the eyes and taste buds.</p>
+
+      <h2>Flown from the USA to Your Cone</h2>
+
+      <p>Hand-picked and flash-frozen at origin to lock in flavor, our blueberries undergo minimal processing to retain their natural taste. This results in an ice cream that tastes like a fresh blueberry burst in every spoonful.</p>
+
+      <ul>
+        <li><strong>Color:</strong> Soft lavender with specks of berry</li>
+        <li><strong>Flavor profile:</strong> Sweet, mellow, lightly tangy</li>
+        <li><strong>Pairs well with:</strong> Cheesecake, lemon zest, or crushed almonds</li>
+      </ul>
+
+      <h2>Why You’ll Love It</h2>
+
+      <p>Blueberry Ice Cream is for those who enjoy a balanced, refreshing treat. Its mellow tones and creamy texture make it a perfect dessert for any time of day.</p>
+
+      <p><strong>Don't miss out!</strong> This special import is available only while stocks last — grab your scoop at the Berry Festival 2025!</p>
+    `
+  },
+
+  blackcurrant: {
+    title: "Black Currant Delight: Imported from the Vineyards of Poland",
+    image: "/static/img/blog4.jpg",
+    content: `
+      <p>Experience the intense richness of Polish black currants, imported straight from Europe’s cold-climate vineyards. These deeply pigmented berries are not just flavorful, but a powerhouse of nutrients and antioxidants.</p>
+
+      <h2>Bold & Refined</h2>
+      <p>Our Black Currant ice cream is a complex experience — earthy, tart, and luxuriously smooth. It’s a favorite for those who prefer a more adult twist on fruity flavors, with a subtle sweetness that lingers beautifully on the palate.</p>
+
+      <ul>
+        <li><strong>Color:</strong> Deep plum to almost black</li>
+        <li><strong>Flavor profile:</strong> Tart, rich, slightly earthy</li>
+        <li><strong>Pairs with:</strong> Cream cheese, vanilla wafers, or dark fruit compotes</li>
+      </ul>
+
+      <p>This international star is a showstopper at the Berry Festival — don’t miss it!</p>
+    `
+  },
+  rosewalnut: {
+    title: "Rose Walnut Fusion: A Fragrant, Crunchy Ice Cream Experience",
+    image: "/static/img/blog6.webp",
+    content: `
+      <p>Discover the floral sweetness of rose blended with the warm nuttiness of toasted walnuts. Inspired by traditional Indian desserts like gulkand and badam sheera, this flavor is nostalgic yet new.</p>
+
+      <h2>Floral & Nutty Harmony</h2>
+      <p>Every bite of Rose Walnut feels like a celebration — subtle rose essence pairs perfectly with crunchy walnuts, delivering a texture-rich dessert that feels both familiar and elevated.</p>
+
+      <ul>
+        <li><strong>Color:</strong> Soft pink with natural walnut specks</li>
+        <li><strong>Flavor profile:</strong> Floral, creamy, earthy</li>
+        <li><strong>Complements:</strong> Saffron syrup, almond brittle, or rose jelly</li>
+      </ul>
+
+      <p>Ideal for those who want elegance and crunch in every scoop.</p>
+    `
+  },
+  floralnutty: {
+    title: "Floral & Nutty Blend: A Romantic Scoop of Nature’s Best",
+    image: "/static/img/blog7.jpeg",
+    content: `
+      <p>What happens when garden-fresh rose meets a medley of crunchy nuts? You get this luxurious floral & nutty blend — aromatic, smooth, and decadently textured for a rich sensory journey.</p>
+
+      <h2>Inspired by Nature</h2>
+      <p>This unique blend celebrates the purity of nature’s ingredients. It’s subtle enough for a quiet afternoon, yet refined enough for special moments shared with someone close.</p>
+
+      <ul>
+        <li><strong>Color:</strong> Rosy beige with nut fragments</li>
+        <li><strong>Flavor profile:</strong> Delicate, sweet, rich</li>
+        <li><strong>Pairs well with:</strong> Pistachios, gulkand, or coconut flakes</li>
+      </ul>
+
+      <p>A poetic, romantic treat for those who savor complexity in flavor.</p>
+    `
+  },
+  blackgrapes: {
+    title: "Black Grapes: A Limited-Edition Wintertime Wonder",
+    image: "/static/img/blog8.png",
+    content: `
+      <p>Sourced from premium vineyards and harvested at peak winter, these black grapes offer juicy notes and a rich wine-like sweetness that makes this flavor a seasonal favorite.</p>
+
+      <h2>Seasonal Excellence</h2>
+      <p>Our black grape ice cream is crafted in small batches to retain the natural taste of freshly crushed grapes. The result? A velvety-smooth, purple scoop that’s perfect for cold evenings or warm conversations.</p>
+
+      <ul>
+        <li><strong>Color:</strong> Purple-blue gradient</li>
+        <li><strong>Flavor profile:</strong> Fruity, juicy, sweet-tart</li>
+        <li><strong>Great with:</strong> Chocolate drizzle, candied almonds, or a pinch of cinnamon</li>
+      </ul>
+
+      <p>Only available during winter — grab it while it lasts!</p>
+    `
+  },
+  cottoncandy: {
+    title: "Cotton Candy Ice Cream: A Sweet Carnival in Every Spoonful",
+    image: "/static/img/cotton.jpg",
+    content: `
+      <p>Let your taste buds travel back to the fun-filled memories of school fairs, amusement parks, and summer carnivals. Cotton Candy ice cream blends cloud-like fluffiness with creamy sweetness that’s hard to resist.</p>
+
+      <h2>Playful & Sweet</h2>
+      <p>Its signature pastel pink hue and dreamy texture make it a favorite among kids — and grownups looking for a bit of nostalgia. A feel-good flavor that brings smiles with every bite.</p>
+
+      <ul>
+        <li><strong>Color:</strong> Baby pink and pastel swirls</li>
+        <li><strong>Flavor profile:</strong> Light, sugary, nostalgic</li>
+        <li><strong>Great with:</strong> Rainbow sprinkles, bubblegum pearls, or white chocolate flakes</li>
+      </ul>
+
+      <p>A magical scoop that tastes like childhood memories!</p>
+    `
+  },
+  chocolate: {
+    title: "Chocolate Heaven: Classic Cocoa Meets Creamy Perfection",
+    image: "/static/img/chocolate1.jpg",
+    content: `
+      <p>Smooth, indulgent, and endlessly satisfying — our Chocolate ice cream is made from rich cocoa and premium milk, making it a beloved staple that appeals to every generation.</p>
+
+      <h2>All-Season Favorite</h2>
+      <p>It’s the go-to choice for chocolate lovers, whether you’re cozying up in winter or cooling off in summer. Each bite delivers the perfect balance of depth and sweetness.</p>
+
+      <ul>
+        <li><strong>Color:</strong> Deep, luscious brown</li>
+        <li><strong>Flavor profile:</strong> Creamy, bold, comforting</li>
+        <li><strong>Goes best with:</strong> Warm brownies, crushed cookies, or fresh berries</li>
+      </ul>
+
+      <p>A timeless treat that turns every day into a special occasion.</p>
+    `
+  }
+
+};
+
+// Get query param
+const params = new URLSearchParams(window.location.search);
+const blogId = params.get("id");
+
+// Load blog
+if (blogData[blogId]) {
+  document.getElementById("blog-title").innerText = blogData[blogId].title;
+  document.getElementById("blog-img").src = blogData[blogId].image;
+  document.getElementById("blog-content").innerHTML = blogData[blogId].content;
+} else {
+  document.getElementById("blog-title").innerText = "Blog Not Found";
+  document.getElementById("blog-content").innerHTML = "<p>This blog does not exist or is unavailable.</p>";
+}
+
+  </script>
+</body>
+</html>

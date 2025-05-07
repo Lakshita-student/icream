@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Detail</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      background: url(../img/back5.jpg) no-repeat center center/cover;
+    }
+
+    .container {
+      display: flex;
+      max-width: 1200px;
+      margin: 60px auto;
+      gap: 40px;
+      padding: 0 20px;
+    }
+
+    .product-img {
+      flex: 1;
+    }
+
+    .product-img img {
+      width: 100%;
+      max-width: 400px;
+      max-height: 500px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-details {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      margin-right: 190px;
+    }
+
+    .stock-status {
+      color: green;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      font-size: 24px;
+      color: #e91e63;
+      margin: 10px 0;
+    }
+
+    .product-name {
+      font-size: 28px;
+      font-weight: 600;
+      color: #c2185b;
+      margin-bottom: 20px;
+    }
+
+    .description {
+      color: #555;
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .buttons button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 30px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .wishlist-btn {
+      background-color: #e91e63;
+      color: white;
+    }
+
+    .wishlist-btn i {
+      margin-left: 6px;
+    }
+
+    .cart-btn {
+      background-color: #f5f5f5;
+      color: #333;
+      border: 1px solid #ccc;
+    }
+
+    .wishlist-btn:hover {
+      background-color: #c2185b;
+    }
+
+    .cart-btn:hover {
+      background-color: #e0e0e0;
+      color: black;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="product-img">
+      <img id="productImage" src="" alt="Product Image">
+    </div>
+    <div class="product-details">
+      <div class="stock-status">In stock</div>
+      <div id="productPrice" class="price"></div>
+      <div id="productName" class="product-name"></div>
+      <div id="productDescription" class="description"></div>
+      <div id="productExtras" style="margin-bottom: 20px;"></div>
+      <div class="buttons">
+        <button onclick="addToWishlist()" class="wishlist-btn">Add To Wishlist <i class="fa-regular fa-heart"></i></button>
+        <button id="addToCartBtn" class="cart-btn">Add To Cart <i class="fa-solid fa-cart-shopping"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:1200px; margin: 60px auto; padding: 0 80px;">
+    <h2 style="margin-bottom: 20px; color: black; margin-left: 420px; font-size: 45px;">Related Products</h2>
+    <div id="relatedProducts" style="display: flex; flex-wrap: wrap; gap: 220px;"></div>
+  </div>
+
+  <div style="max-width: 900px; margin: 40px auto; padding: 20px; background-color: #f9f9f9; border-radius: 10px;">
+    <h2 style="margin-bottom: 20px; color: #c2185b;">Customer Reviews</h2>
+  
+    <div id="reviewList" style="margin-bottom: 30px;"></div>
+  
+    <h3 style="margin-bottom: 10px;">Leave a Review</h3>
+    <form id="reviewForm" style="display: flex; flex-direction: column; gap: 10px;">
+      <input type="text" id="reviewerName" placeholder="Your Name" required style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+      <textarea id="reviewText" rows="4" placeholder="Write your review here..." required style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;"></textarea>
+      <button type="submit" style="align-self: flex-start; background-color: #e91e63; color: white; padding: 10px 20px; border: none; border-radius: 20px; cursor: pointer;">Submit Review</button>
+    </form>
+  </div>
+  
+  
+
+  <script>
+    const products = [
+      { id: 1, title: "Vanilla Ice Cream", price: "$19", description: "Classic vanilla made from natural vanilla beans.", img: "/static/img/Vanilla.png",artNo: "IC103",color: "White",size: "Medium"  },
+      { id: 2, title: "Chocolate Ice Cream", price: "$29", description: "Delicious chocolate made from real cocoa.", img: "/static/img/chocolate.png",artNo: "IC104",color: "Brown",size: "Medium" },
+      { id: 3, title: "Strawberry Delight", price: "$20", description: "Refreshing strawberry treat with a fruity punch.", img: "/static/img/Strawberry.png",artNo: "IC105",color: "Pink",size: "Medium" },
+      { id: 4, title: "Coconut Twist", price: "$19", description: "Creamy coconut flavor with a tropical vibe.", img: "/static/img/Coconut.png",artNo: "IC106",color: "White",size: "Medium" },
+      { id: 5, title: "Pistachio Ice Cream", price: "$39", description: "Rich pistachio flavor with nutty goodness.", img: "/static/img/Pistachio.png",artNo: "IC107",color: "Pista",size: "Medium"  },
+      { id: 6, title: "Hazelnut Crunch Ice Cream", price: "$35", description: "Smooth hazelnut ice cream with crunchy bits.", img: "/static/img/Hazelnut.png",artNo: "IC108",color: "Brown",size: "Medium" },
+      { id: 7, title: "Rosemary Ice Cream", price: "$25", description: "Aromatic rosemary-infused ice cream with a unique twist.", img: "/static/img/Rosemary.png",artNo: "IC109",color: "Cream",size: "Medium" },
+      { id: 8, title: "Blueberry Ice Cream", price: "$20", description: "Bursting with real blueberries and creamy texture.", img: "/static/img/Blueberry.png",artNo: "IC110",color: "Blue",size: "Medium"  },
+      { id: 9, title: "Pulpy Mango", price: "$25", description: "Sweet and pulpy mango flavor straight from the tropics.", img: "/static/img/mango.jpg",artNo: "IC111",color: "Yellow",size: "Medium" },
+      { id: 10, title: "Coffee Cream", price: "$29", description: "Bold coffee flavor blended with smooth cream.", img: "/static/img/Coffee.jpg" ,artNo: "IC112",color: "Brown",size: "Medium"},
+      { id: 11, title: "Cotton Candy Ice Cream", price: "$23", description: "Sweet, fluffy cotton candy taste in creamy form.", img: "/static/img/cotton.jpg" ,artNo: "IC113",color: "Rainbow",size: "Medium"},
+      { id: 12, title: "Black Current", price: "$25", description: "Tart black currants meet rich dairy goodness.", img: "/static/img/blackcurrent.jpg" ,artNo: "IC114",color: "Violet",size: "Medium"},
+      { id: 13, title: "Black Walnut Ice Cream", price: "$25", description: "Nutty black walnut delight with a creamy finish.", img: "/static/img/blackwalnut.jpg",artNo: "IC115",color: "Light Brown",size: "Medium" },
+      { id: 14, title: "Nutty Caramel", price: "$35", description: "Sweet caramel mixed with roasted nuts for a perfect crunch.", img: "/static/img/Caramel.jpg",artNo: "IC116",color: "Light Brown",size: "Medium" },
+      { id: 15, title: "Cookies n Cream", price: "$27", description: "Classic cookies blended in rich cream.", img: "/static/img/cookies.jpg",artNo: "IC117",color: "Brown",size: "Medium"  },
+      { id: 16, title: "Mint Choco Chips", price: "$28", description: "Cool mint ice cream with chocolate chip bites.", img: "/static/img/mint.jpg" ,artNo: "IC118",color: "Green",size: "Medium"},
+      { id: 17, title: "Vanilla Ice Cream", price: "$18", description: "Classic vanilla made from natural vanilla beans.", img: "/static/img/vanilla1.jpg",artNo: "IC119",color: "White",size: "Medium"  },
+      { id: 18, title: "Vanilla Ice Cream", price: "$19", description: "Classic vanilla made from natural vanilla beans.", img: "/static/img/Vanilla2.jpg",artNo: "IC104",color: "White",size: "Medium" },
+      { id: 19, title: "Vanilla Ice Cream", price: "$22", description: "Classic vanilla made from natural vanilla beans.", img: "/static/img/Vanilla3.jpg",artNo: "IC105",color: "White",size: "Medium" },
+      { id: 20, title: "Strawberry Ice Cream", price: "$19", description: "Refreshing strawberry treat with a fruity punch.", img: "/static/img/Strawberry1.jpg",artNo: "IC106",color: "Pink",size: "Medium" },
+      { id: 21, title: "Strawberry Ice Cream", price: "$25", description: "Refreshing strawberry treat with a fruity punch.", img: "/static/img/Strawberry2.jpg",artNo: "IC107",color: "Pink",size: "Medium"  },
+      { id: 22, title: "Strawberry Ice Cream", price: "$22", description: "Refreshing strawberry treat with a fruity punch.", img: "/static/img/Strawberry3.jpg",artNo: "IC108",color: "Pink",size: "Medium" },
+      { id: 23, title: "Chocolate Ice Cream", price: "$23", description: "Delicious chocolate made from real cocoa.", img: "/static/img/chocolate1.jpg",artNo: "IC109",color: "Brown",size: "Medium" },
+      { id: 24, title: "Chocolate Ice Cream", price: "$29", description: "Delicious chocolate made from real cocoa.", img: "/static/img/chocolate2.jpg",artNo: "IC110",color: "Brown",size: "Medium"  },
+      { id: 25, title: "Chocolate Ice Cream", price: "$22", description: "Delicious chocolate made from real cocoa.", img: "/static/img/chocolate3.jpg",artNo: "IC111",color: "Brown",size: "Medium" },
+      { id: 26, title: "Coconut Ice Cream", price: "$20", description: "Creamy coconut flavor with a tropical vibe.", img: "/static/img/coconut1.jpg" ,artNo: "IC112",color: "White",size: "Medium"},
+      { id: 27, title: "Coconut Ice Cream", price: "$18", description: "Creamy coconut flavor with a tropical vibe.", img: "/static/img/coconut2.jpg" ,artNo: "IC113",color: "White",size: "Medium"},
+      { id: 28, title: "Coconut Ice Cream", price: "$27", description: "Creamy coconut flavor with a tropical vibe.", img: "/static/img/coconut3.jpg" ,artNo: "IC114",color: "White",size: "Medium"},
+      { id: 29, title: "Pistachio Ice Cream", price: "$32", description: "Rich pistachio flavor with nutty goodness.", img: "/static/img/pistachio1.jpg",artNo: "IC115",color: "Pista",size: "Medium" },
+      { id: 30, title: "Pistachio Ice Cream", price: "$30", description: "Rich pistachio flavor with nutty goodness.", img: "/static/img/pistachio2.jpg",artNo: "IC116",color: "Pista",size: "Medium" },
+      { id: 31, title: "Pistachio Ice Cream", price: "$22", description: "Rich pistachio flavor with nutty goodness.", img: "/static/img/pistachio3.jpg",artNo: "IC117",color: "Pista",size: "Medium"  },
+      { id: 32, title: "Hazelnut Crunch Ice Cream", price: "$28", description: "Smooth hazelnut ice cream with crunchy bits.", img: "/static/img/hazelnut1.jpg" ,artNo: "IC118",color: "Brown",size: "Medium"},
+      { id: 33, title: "Hazelnut Crunch Ice Cream", price: "$29", description: "Smooth hazelnut ice cream with crunchy bits.", img: "/static/img/hazelnut2.jpg",artNo: "IC103",color: "Brown",size: "Medium"  },
+      { id: 34, title: "Hazelnut Crunch Ice Cream", price: "$39", description: "Smooth hazelnut ice cream with crunchy bits.", img: "/static/img/hazelnut3.jpg",artNo: "IC104",color: "Brown",size: "Medium" },
+      { id: 35, title: "Rosemary Ice Cream", price: "$29", description: "Aromatic rosemary-infused ice cream with a unique twist.", img: "/static/img/rosemary1.jpg",artNo: "IC105",color: "Cream",size: "Medium" },
+      { id: 36, title: "Rosemary Ice Cream", price: "$19", description: "Aromatic rosemary-infused ice cream with a unique twist.", img: "/static/img/rosemary2.jpg",artNo: "IC106",color: "Cream",size: "Medium" },
+      { id: 37, title: "Rosemary Ice Cream", price: "$25", description: "Aromatic rosemary-infused ice cream with a unique twist.", img: "/static/img/rosemary3.jpg",artNo: "IC107",color: "Cream",size: "Medium"  },
+      { id: 38, title: "Blueberry Ice Cream", price: "$35", description: "Bursting with real blueberries and creamy texture.", img: "/static/img/bluebarry1.jpg",artNo: "IC108",color: "Blue",size: "Medium" },
+      { id: 39, title: "Blueberry Ice Cream", price: "$29", description: "Bursting with real blueberries and creamy texture.", img: "/static/img/blueberry2.jpg",artNo: "IC109",color: "Blue",size: "Medium" },
+      { id: 40, title: "Blueberry Ice Cream", price: "$27", description: "Bursting with real blueberries and creamy texture.", img: "/static/img/blueberry3.jpg",artNo: "IC110",color: "Blue",size: "Medium"  },
+      { id: 41, title: "Pulpy Mango", price: "$25", description: "Sweet and pulpy mango flavor straight from the tropics.", img: "/static/img/mango1.jpg",artNo: "IC111",color: "Yellow",size: "Medium" },
+      { id: 42, title: "Pulpy Mango", price: "$29", description: "Sweet and pulpy mango flavor straight from the tropics.", img: "/static/img/mango2.jpg" ,artNo: "IC112",color: "Yellow",size: "Medium"},
+      { id: 43, title: "Pulpy Mango", price: "$18", description: "Sweet and pulpy mango flavor straight from the tropics.", img: "/static/img/mango3.jpg" ,artNo: "IC113",color: "Yellow",size: "Medium"},
+      { id: 44, title: "Black Current", price: "$27", description: "Tart black currants meet rich dairy goodness.", img: "/static/img/blackcurrent.jpg" ,artNo: "IC114",color: "Violet",size: "Medium"},
+      { id: 45, title: "Coffee Cream", price: "$29", description: "Bold coffee flavor blended with smooth cream.", img: "/static/img/coffee1.jpg" ,artNo: "IC112",color: "Brown",size: "Medium"},
+      { id: 46, title: "Coffee Cream", price: "$28", description: "Bold coffee flavor blended with smooth cream.", img: "/static/img/coffee2.jpg" ,artNo: "IC113",color: "Brown",size: "Medium"},
+      { id: 47, title: "Coffee Cream", price: "$29", description: "Bold coffee flavor blended with smooth cream.", img: "/static/img/coffee3.jpg" ,artNo: "IC114",color: "Brown",size: "Medium"},
+      { id: 48, title: "Cotton Candy Ice Cream", price: "$19", description: "Sweet, fluffy cotton candy taste in creamy form.", img: "/static/img/cotton1.jpg",artNo: "IC115",color: "Rainbow",size: "Medium" },
+      { id: 49, title: "Cotton Candy Ice Cream", price: "$29", description: "Sweet, fluffy cotton candy taste in creamy form.", img: "/static/img/cotton2.jpg",artNo: "IC116",color: "Rainbow",size: "Medium" },
+      { id: 50, title: "Cotton Candy Ice Cream", price: "$32", description: "Sweet, fluffy cotton candy taste in creamy form.", img: "/static/img/cotton3.jpg",artNo: "IC117",color: "Rainbow",size: "Medium"  },
+      { id: 51, title: "Black Current", price: "$28", description: "Tart black currants meet rich dairy goodness.", img: "/static/img/blackcurrent1.jpg" ,artNo: "IC118",color: "Violet",size: "Medium"},
+      { id: 52, title: "Black Current", price: "$19", description: "Tart black currants meet rich dairy goodness.", img: "/static/img/blackcurrent2.jpg",artNo: "IC119",color: "Violet",size: "Medium"  },
+      { id: 53, title: "Black Current", price: "$29", description: "Tart black currants meet rich dairy goodness.", img: "/static/img/blackcurrent3.jpg",artNo: "IC104",color: "Violet",size: "Medium" }
+    ];
+
+    const params = new URLSearchParams(window.location.search);
+    const productId = parseInt(params.get("id"));
+    const product = products.find(p => p.id === productId);
+    const extrasDiv = document.getElementById("productExtras");
+    extrasDiv.innerHTML = `
+  ${product.artNo ? `<div><strong>Art No:</strong> ${product.artNo}</div>` : ""}
+  ${product.color ? `<div><strong>Color:</strong> ${product.color}</div>` : ""}
+  ${product.size ? `<div><strong>Size:</strong> ${product.size}</div>` : ""}
+`;
+
+
+    if (product) {
+      document.getElementById("productImage").src = product.img;
+      document.getElementById("productName").textContent = product.title;
+      document.getElementById("productPrice").textContent = product.price;
+      document.getElementById("productDescription").textContent = product.description;
+
+      document.getElementById("productExtras").innerHTML = `
+    ${product.artNo ? `<div><strong>Art No:</strong> ${product.artNo}</div>` : ""}
+    ${product.color ? `<div><strong>Color:</strong> ${product.color}</div>` : ""}
+    ${product.size ? `<div><strong>Size:</strong> ${product.size}</div>` : ""}
+  `;
+    } else {
+      document.body.innerHTML = "<h2>Product not found.</h2>";
+    }
+
+    // Add to Cart logic
+    document.getElementById("addToCartBtn").addEventListener("click", () => {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      const existingItem = cart.find(item => item.id === product.id);
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({ ...product, quantity: 1 });
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert("Product added to cart!");
+    });
+
+
+    function getRelatedProducts(currentProduct, allProducts) {
+  const keyword = currentProduct.title.split(" ")[0].toLowerCase(); // e.g., 'Vanilla'
+  return allProducts.filter(p =>
+    p.id !== currentProduct.id && p.title.toLowerCase().includes(keyword)
+  );
+}
+
+function renderRelatedProducts(related) {
+  const relatedContainer = document.getElementById("relatedProducts");
+  related.forEach(item => {
+    const card = document.createElement("div");
+    card.style.width = "240px";
+    card.style.border = "1px solid #eee";
+    card.style.borderRadius = "10px";
+    card.style.overflow = "hidden";
+    card.style.boxShadow = "0 2px 6px rgba(0,0,0,0.1)";
+    card.style.background = "#fff";
+    card.innerHTML = `
+      <img src="${item.img}" alt="${item.title}" style="width: 100%; height: 160px; object-fit: cover;">
+      <div style="padding: 10px;">
+        <h4 style="margin: 10px 0; font-size: 16px; color:#c2185b;">${item.title}</h4>
+        <p style="color:#e91e63; font-weight: bold; margin-bottom: 10px;">${item.price}</p>
+        <a href="?id=${item.id}" style="text-decoration: none; color: white; background: #e91e63; padding: 6px 12px; border-radius: 20px; display: inline-block; font-size: 14px;">View</a>
+      </div>
+    `;
+    relatedContainer.appendChild(card);
+  });
+}
+
+const related = getRelatedProducts(product, products);
+renderRelatedProducts(related);
+
+  const reviewForm = document.getElementById("reviewForm");
+  const reviewList = document.getElementById("reviewList");
+
+  const reviews = [];
+
+  reviewForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById("reviewerName").value.trim();
+    const text = document.getElementById("reviewText").value.trim();
+
+    if (name && text) {
+      const review = {
+        name: name,
+        text: text,
+        date: new Date().toLocaleDateString()
+      };
+      reviews.push(review);
+      displayReviews();
+      reviewForm.reset();
+    }
+  });
+
+  function displayReviews() {
+    reviewList.innerHTML = "";
+    reviews.forEach((rev) => {
+      const div = document.createElement("div");
+      div.style.marginBottom = "20px";
+      div.innerHTML = `
+        <strong style="color: #c2185b;">${rev.name}</strong> <small style="color: gray;">(${rev.date})</small>
+        <p style="margin: 5px 0; color: #555;">${rev.text}</p>
+        <hr style="border: 0.5px solid #ddd;" />
+      `;
+      reviewList.appendChild(div);
+    });
+
+  }
+
+  function addToWishlist() {
+  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+  
+  // Avoid duplicate entries
+  if (!wishlist.find(p => p.id === product.id)) {
+    wishlist.push(product);
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    alert(`${product.title} added to wishlist!`);
+  } else {
+    alert("Already in wishlist!");
+  }
+}
+  </script>
+
+</body>
+</html>

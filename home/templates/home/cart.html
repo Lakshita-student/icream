@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Bag</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #111;
+    }
+
+    /* Top Bar */
+  .top-bar {
+    background: #f9a9c4;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: white;
+    align-items: center;
+    height:100px;
+  }
+  
+  .top-bar a {
+    color: white;
+    margin: 0 0.5rem;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .left-links a::after {
+    content: "";
+  }
+  
+  .right-icons a {
+    margin-left: 10px;
+    font-size: 16px; /* or maybe 20px depending on what you want */
+    color: white;
+  }
+  
+  
+  /* Navigation Bar */
+  .navbar {
+    background: white;
+    border-radius: 40px;
+    padding: 0.3rem 0.3rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 1200px;
+    margin: -40px auto 0;
+    z-index: 10;
+    position: relative;
+    height:80px;
+  }
+  
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin-top: 25px;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    font-size: 15px;
+    transition: color 0.3s ease;
+    margin-top: 100px;
+  }
+  
+  .nav-links a.active,
+  .nav-links a:hover {
+    color: #f57aa7;
+  }
+  
+  .logo {
+    font-size: 50px;
+    font-weight: 700;
+    color: #40cbee;
+    margin-top: 10px;
+  }
+  
+  .logo span {
+    color: #f57aa7;
+  }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      padding: 30px;
+      gap: 40px;
+    }
+
+    .cart-left {
+      flex: 2;
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 20px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+
+    .cart-item img {
+      width: 130px;
+      height: 130px;
+      object-fit: cover;
+    }
+
+    .cart-details {
+      flex-grow: 1;
+    }
+
+    .cart-details h4 {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .cart-details p {
+      margin: 4px 0;
+      font-size: 14px;
+    }
+
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .quantity-controls button {
+      padding: 5px 10px;
+      font-size: 16px;
+      border: 1px solid #333;
+      background: white;
+      cursor: pointer;
+    }
+
+    .remove-btn {
+      color: red;
+      background: white;
+      border: 1px solid red;
+      cursor: pointer;
+      padding: 5px 10px;
+      margin-top: 5px;
+    }
+
+    .cart-right {
+      flex: 1;
+      border: 1px solid #ddd;
+      padding: 20px;
+      max-height: 400px;
+      animation: rainbow 10s ease infinite, pulseGlow 2s infinite;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+    }
+
+    @keyframes rainbow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px #fff, 0 0 20px #f57aa7, 0 0 30px #ff6ec4;
+  }
+  50% {
+    box-shadow: 0 0 20px #fff, 0 0 30px #47c9e5, 0 0 40px #7873f5;
+  }
+}
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0;
+    }
+
+    .checkout-btn,
+    .signin-btn {
+      width: 100%;
+      padding: 15px;
+      font-size: 16px;
+      margin-top: 20px;
+      cursor: pointer;
+      border: none;
+    }
+
+
+
+    .checkout-btn {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  font-size: 16px;
+  background-color: #f57aa7;
+  background-image: linear-gradient(315deg, #f57aa7 0%, #fc7cab 74%);
+  color: white;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-top: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.4s ease, transform 0.3s ease;
+}
+
+
+.checkout-btn:hover::before {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.checkout-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.btn-link{
+  color:white;
+  text-decoration: none;
+}
+
+.signin-btn {
+      border: 1px solid #f57aa7;
+      background: white;
+    }
+
+    .footer-note {
+      font-size: 12px;
+      color: #666;
+      margin-top: 20px;
+    }
+
+    .payment-logos {
+      margin-top: 10px;
+    }
+
+    .payment-logos img {
+      height: 25px;
+      margin-right: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="left-links">
+      <a href="#">FAQs</a> |
+      <a href="#">Help</a> |
+      <a href="#">Support</a>
+    </div>
+    <div class="right-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="/Wishlist"><i class="fa-solid fa-heart"></i></a>
+      <!--<i class="fa-solid fa-cart-shopping"></i>-->
+      <a href="/login"><i class="fa-solid fa-user" style="color: white;"></i></a>
+      <a href="/Cart" alt="Cart" id="cartIcon" class="cart-icon"><i class="fa-solid fa-cart-shopping"></i></a>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <nav>
+      <ul class="nav-links">
+        <li><a class="active" href="/">Home</a></li>
+        <li><a href="/About">About</a></li>
+        <li><a href="/Product">Product</a></li>
+      </ul>
+      <div class="logo">i<span>CREAM</span></div>
+      <ul class="nav-links">
+        <li><a href="/Blog">Blogs</a></li>
+        <li><a href="/Gallery">Gallery</a></li>
+        <li><a href="/Contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    <!-- Left: Cart Items -->
+    <div class="cart-left" id="cartItems"></div>
+
+    <!-- Right: Summary -->
+    <div class="cart-right">
+      <h4>DISCOUNTS <span style="float:right;"><a href="#">ADD</a></span></h4>
+      <div class="summary-row">
+        <span>Order value</span>
+        <span id="orderValue">$ 0.00</span>
+      </div>
+      <div class="summary-row">
+        <span>Estimated delivery fee</span>
+        <span id="deliveryFee">$ 1</span>
+      </div>
+      <hr>
+      <div class="summary-row">
+        <strong>TOTAL</strong>
+        <strong id="totalPrice">$ 0.00</strong>
+      </div>
+      <a href="/Checkout" class="btn-link">
+        <button class="checkout-btn">CONTINUE TO CHECKOUT</button>
+      </a>
+      <button class="signin-btn">SIGN IN</button>
+    </div>
+  </div>
+
+  <script>
+    // Initialize cart or an empty array if not found in localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    // DOM elements for displaying cart and totals
+    const cartItemsDiv = document.getElementById('cartItems');
+    const orderValue = document.getElementById('orderValue');
+    const totalPrice = document.getElementById('totalPrice');
+    const deliveryFee = 1;
+    
+    // Function to update the cart display
+    function updateCartDisplay() {
+      if (cart.length === 0) {
+        cartItemsDiv.innerHTML = "<p>Your cart is empty.<br><a href='/Product' style='text-decoration: none; color: inherit;'>Start Shopping</a></p>";
+        orderValue.textContent = "$ 0.00";
+        totalPrice.textContent = "$ 0.00";
+        return;
+      }
+    
+      let total = 0;
+      cartItemsDiv.innerHTML = cart.map((item, index) => {
+        if (item.quantity === undefined || item.quantity === null) {
+          item.quantity = 1;
+        }
+    
+        // Convert price safely to number, removing currency symbols and commas if needed
+        let priceValue = typeof item.price === "number"
+          ? item.price
+          : parseFloat(item.price.replace(/[^0-9.]/g, ''));
+    
+        if (isNaN(priceValue)) priceValue = 0;
+    
+        const itemTotal = priceValue * item.quantity;
+        total += itemTotal;
+    
+        return `
+          <div class="cart-item" data-index="${index}">
+            <img src="${item.img}" alt="${item.title}">
+            <div class="cart-details">
+              <h4>${item.title}</h4>
+              <p>$ ${priceValue.toFixed(2)}</p>
+              <p>Art no: ${item.artNo}</p>
+              <p>Colour: ${item.color}</p>
+              <p>Size: ${item.size}</p>
+              <p>Quantity: <span>${item.quantity}</span></p>
+              <div class="quantity-controls">
+                <button onclick="decreaseQuantity(${index})">-</button>
+                <span>${item.quantity}</span>
+                <button onclick="increaseQuantity(${index})">+</button>
+              </div>
+              <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+            </div>
+          </div>`;
+      }).join('');
+    
+      orderValue.textContent = `$ ${total.toFixed(2)}`;
+      totalPrice.textContent = `$ ${(total + deliveryFee).toFixed(2)}`;
+    }
+    
+    // Increase item quantity
+    function increaseQuantity(index) {
+      cart[index].quantity++;
+      saveAndRefresh();
+    }
+    
+    // Decrease item quantity
+    function decreaseQuantity(index) {
+      if (cart[index].quantity > 1) {
+        cart[index].quantity--;
+      } else {
+        cart.splice(index, 1);
+      }
+      saveAndRefresh();
+    }
+    
+    // Remove item
+    function removeItem(index) {
+      cart.splice(index, 1);
+      saveAndRefresh();
+    }
+    
+    // Save and refresh
+    function saveAndRefresh() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartDisplay();
+    }
+    
+    // Initial render
+    updateCartDisplay();
+    
+  </script>
+
+</body>
+</html>

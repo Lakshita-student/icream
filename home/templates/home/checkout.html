@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shopping Bag</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+    }
+
+    /* Top Bar */
+  .top-bar {
+    background: #f9a9c4;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: white;
+    align-items: center;
+    height:100px;
+  }
+  
+  .top-bar a {
+    color: white;
+    margin: 0 0.5rem;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .left-links a::after {
+    content: "";
+  }
+  
+  .right-icons a {
+    margin-left: 10px;
+    font-size: 16px; /* or maybe 20px depending on what you want */
+    color: white;
+  }
+  
+  
+  /* Navigation Bar */
+  .navbar {
+    background: white;
+    border-radius: 40px;
+    padding: 0.3rem 0.3rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 1200px;
+    margin: -40px auto 0;
+    z-index: 10;
+    position: relative;
+    height:80px;
+  }
+  
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin-top: 25px;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    font-size: 15px;
+    transition: color 0.3s ease;
+    margin-top: 100px;
+  }
+  
+  .nav-links a.active,
+  .nav-links a:hover {
+    color: #f57aa7;
+  }
+  
+  .logo {
+    font-size: 50px;
+    font-weight: 700;
+    color: #40cbee;
+    margin-top: 10px;
+  }
+  
+  .logo span {
+    color: #f57aa7;
+  }
+
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+      /*background: url('../img/cart7.jpg') no-repeat center;*/
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+    }
+
+    .total-line {
+      font-weight: bold;
+      padding-top: 10px;
+      border-top: 1px solid #ddd;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .checkout-btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      font-size: 16px;
+      background: #000;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 20px;
+      background-color: #f57aa7;
+      background-image: linear-gradient(315deg, #f57aa7 0%, #fc7cab 74%);
+      transition: background 0.4s ease, transform 0.3s ease;
+    }
+
+
+    .checkout-btn:hover::before {
+     transform: translate(-50%, -50%) scale(1);
+  }
+
+    .checkout-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+
+    .checkout-form {
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      background: #f9f9f9;
+      animation: rainbow 10s ease infinite, pulseGlow 2s infinite;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+
+    }
+
+    @keyframes rainbow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px #fff, 0 0 20px #f57aa7, 0 0 30px #ff6ec4;
+  }
+  50% {
+    box-shadow: 0 0 20px #fff, 0 0 30px #47c9e5, 0 0 40px #7873f5;
+  }
+}
+
+    .checkout-form input,
+    .checkout-form select,
+    .checkout-form button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .checkout-form h3 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .checkout-form button {
+      background: transparent;
+      cursor: pointer;
+      
+    }
+
+    .checkout-form button:hover {
+      background: linear-gradient( #fc9ec0, #baf0fd);
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      background-color:linear-gradient(to right #f57aa7, #40cbee );
+      cursor: pointer;
+      
+    }
+
+
+    /* Loading Spinner */
+  .spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+    margin: 20px auto;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* Please wait text */
+  .loading-text {
+    text-align: center;
+    font-size: 18px;
+    color: #3498db;
+    margin-top: 10px;
+  }
+
+  /* Animation styles */
+  .fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .fade-in {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+  }
+
+  .hidden {
+    display: none;
+  }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="left-links">
+      <a href="#">FAQs</a> |
+      <a href="#">Help</a> |
+      <a href="#">Support</a>
+    </div>
+    <div class="right-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="/Wishlist"><i class="fa-solid fa-heart"></i></a> 
+      <!--<i class="fa-solid fa-cart-shopping"></i>-->
+      <a href="/login"><i class="fa-solid fa-user" style="color: white;"></i></a>
+      <a href="/Cart" alt="Cart" id="cartIcon" class="cart-icon"><i class="fa-solid fa-cart-shopping"></i></a>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <nav>
+      <ul class="nav-links">
+        <li><a class="active" href="/">Home</a></li>
+        <li><a href="/About">About</a></li>
+        <li><a href="/Product">Product</a></li>
+      </ul>
+      <div class="logo">i<span>CREAM</span></div>
+      <ul class="nav-links">
+        <li><a href="/Blog">Blogs</a></li>
+        <li><a href="/Gallery">Gallery</a></li>
+        <li><a href="/Contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container" id="cartContainer">
+    <div id="cartItems"></div>
+    <div class="total-line">
+      <span>Shipping Fee</span>
+      <span>$ 1.00</span>
+    </div>
+    <div class="total-line">
+      <span>Total with Shipping</span>
+      <span id="grandTotal">$ 0.00</span>
+    </div>
+    <button class="checkout-btn" onclick="goToCheckout()">CONTINUE TO CHECKOUT</button>
+  </div>
+
+  <!-- Checkout Form -->
+  <div id="checkoutPage" class="checkout-form hidden" style="display: none;">
+    <h3>Checkout</h3>
+    <form id="checkoutForm">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" required placeholder="Enter your name"/>
+
+      <label for="address">Shipping Address</label>
+      <input type="text" id="address" required placeholder="Enter your address"/>
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" required placeholder="Enter your phone number"/>
+
+      <label for="payment">Payment Method</label>
+      <select id="payment" required>
+        <option value="credit_card">Credit Card</option>
+        <option value="debit_card">Debit Card</option>
+        <option value="cash_on_delivery">Cash on Delivery</option>
+      </select>
+      <label for="cardNumber" id="cardNumberLabel" style="display: none;">Card Number</label>
+      <input type="text" id="cardNumber" placeholder="Enter your card number" style="display: none;" pattern="\d{16}" maxlength="16" />
+
+      <button type="submit">Submit Order</button>
+    </form>
+    <button class="back-btn" style="background-color:linear-gradient(to right #f57aa7, #40cbee );" onclick="goBackToCart()">Back to Cart</button>
+  </div>
+
+  <script>
+    const SHIPPING_FEE = 1;
+
+    function displayCartItems() {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const cartContainer = document.getElementById('cartItems');
+  cartContainer.innerHTML = '';
+
+  let subtotal = 0;
+
+  cart.forEach(item => {
+    const itemName = item.title || 'Unnamed Item';
+
+    // Parse price safely (strip Rs., $ etc. if it's a string)
+    let itemPrice = typeof item.price === 'number'
+      ? item.price
+      : parseFloat(item.price.replace(/[^0-9.]/g, ''));
+
+    if (isNaN(itemPrice)) itemPrice = 0;
+
+    const quantity = item.quantity || 1;
+    const itemTotal = itemPrice * quantity;
+    subtotal += itemTotal;
+
+    cartContainer.innerHTML += `
+      <div class="cart-item">
+        <span>${item.title}</span>
+        <span>$ ${itemTotal.toFixed(2)}</span>
+      </div>
+    `;
+  });
+
+  const SHIPPING_FEE = 1; // or set to 0 if not needed
+  const grandTotal = subtotal + SHIPPING_FEE;
+  document.getElementById('grandTotal').textContent = `$ ${grandTotal.toFixed(2)}`;
+
+  // Store grand total for checkout use
+  localStorage.setItem('cartTotal', grandTotal);
+}
+
+
+    function goToCheckout() {
+      const total = localStorage.getItem('cartTotal') || 0;
+      alert(`Proceeding to checkout with a total of $ ${parseFloat(total).toFixed(2)}`);
+      document.getElementById('cartContainer').style.display = 'none';
+      document.getElementById('checkoutPage').style.display = 'block';
+    }
+
+    function goBackToCart() {
+      document.getElementById('checkoutPage').style.display = 'none';
+      document.getElementById('cartContainer').style.display = 'block';
+    }
+
+    document.getElementById('checkoutForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const name = document.getElementById('name').value;
+      const address = document.getElementById('address').value;
+      const phone = document.getElementById('phone').value;
+      const payment = document.getElementById('payment').value;
+
+      alert(`Order placed successfully for ${name}.\nAddress: ${address}\nPhone: ${phone}\nPayment Method: ${payment}`);
+      localStorage.removeItem('cart');
+      localStorage.removeItem('cartTotal');
+      // Redirect to product.html
+      window.location.href = '/Product';
+    });
+
+    // Show/hide card number field based on selected payment method
+document.getElementById('payment').addEventListener('change', function () {
+  const selected = this.value;
+  const cardField = document.getElementById('cardNumber');
+  const cardLabel = document.getElementById('cardNumberLabel');
+
+  if (selected === 'credit_card' || selected === 'debit_card') {
+    cardField.style.display = 'block';
+    cardLabel.style.display = 'block';
+    cardField.setAttribute('required', true);
+  } else {
+    cardField.style.display = 'none';
+    cardLabel.style.display = 'none';
+    cardField.removeAttribute('required');
+  }
+});
+
+
+    // Initial render
+    displayCartItems();
+  </script>
+
+</body>
+</html>

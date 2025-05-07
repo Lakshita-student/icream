@@ -1,0 +1,393 @@
+{% load static  %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>iCream</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="left-links">
+      <a href="#">FAQs</a> |
+      <a href="#">Help</a> |
+      <a href="#">Support</a>
+    </div>
+    <div class="right-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="/Wishlist"><i class="fa-solid fa-heart"></i></a>
+      <a href="/login"><i class="fa-solid fa-user" style="color: white;"></i></a>
+      <a href="/Cart" alt="Cart" id="cartIcon" class="cart-icon"><i class="fa-solid fa-cart-shopping"></i></a>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <nav>
+      <ul class="nav-links">
+        <li><a class="active" href="/">Home</a></li>
+        <li><a href="/About">About</a></li>
+        <li><a href="/Product">Product</a></li>
+      </ul>
+      <div class="logo">i<span>CREAM</span></div>
+      <ul class="nav-links">
+        <li><a href="/Blog">Blogs</a></li>
+        <li><a href="/Gallery">Gallery</a></li>
+        <li><a href="/Contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="hero-arrow left" onclick="changeSlide(-1)">&#10094;</div>  <!--Entity code of arrows-->
+
+    <div class="hero-content">
+      <h4>TRADITIONAL & DELICIOUS</h4>
+      <h1>Traditional Ice Cream <br> Since 1950</h1>
+    </div>
+
+    <div class="hero-arrow right" onclick="changeSlide(1)">&#10095;</div>
+  </section>
+
+
+  <!-- About Section -->
+  <section class="about">
+    <div class="container">
+
+      <!-- Section Title -->
+      <div class="section-title">
+        <div class="line"></div>
+        <h2>Traditional & Delicious Ice <br> Cream Since 1950</h2>
+      </div>
+
+      <div class="about-text">
+        <h2>About Us</h2>
+        <p class="subtitle">We create delicious, traditional ice cream made with love and care.</p>
+        <p>
+          Since 1950, we've been crafting quality ice cream using fresh ingredients and classic recipes.
+          Our passion for flavor and dedication to tradition make every scoop unforgettable.
+          Join us and taste the sweet difference of generations of excellence.
+        </p>
+        <a href="#" class="btn">Learn More</a>
+      </div>
+
+      <div class="about-image">
+        <img src="/static/img/about.jpg" alt="Ice Cream">
+      </div>
+
+      <div class="about-features">
+        <h3>Our Features</h3>
+        <p>
+          At our shop, we offer a warm, welcoming atmosphere with top-quality treats. Whether you're craving a cone or a
+          sundae,
+          we have something special for everyone.
+        </p>
+        <ul>
+          <li>✔️ Handcrafted with natural ingredients</li>
+          <li>✔️ A variety of classic and modern flavors</li>
+          <li>✔️ Friendly service and cozy ambiance</li>
+        </ul>
+        <a href="#" class="btn pink">Learn More</a>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="product-highlight">
+    <div class="product-container">
+      <!-- Left side image with play button -->
+      <div class="product-image">
+        <img src="/static/img/promotion.jpg" alt="Ice Cream Banner">
+        <div class="play-button" onclick="openVideo()">
+          &#9658;
+        </div>
+      </div>
+
+      <!-- Right side content -->
+      <div class="product-content">
+        <div class="price-circle">$199</div>
+        <h3>Chocolate Ice Cream</h3>
+        <p>
+          Enjoy rich and creamy chocolate ice cream made with premium cocoa and fresh milk.
+          A perfect treat for any time of the day.
+        </p>
+        <a href="#" class="btn order-btn">Order Now</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Video Modal -->
+  <div id="videoModal" class="video-modal">
+    <div class="video-content">
+      <span class="close-btn">&times;</span>
+      <video id="myVideo" controls autoplay loop>
+        <source src="/static/img/icecream.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+
+
+
+  <section class="service-section">
+    <h2>Best Services We Provide<br>For Our Clients</h2>
+
+    <div class="arrow-container">
+      <button class="arrow" id="leftArrow">&#8592;</button>
+      <button class="arrow" id="rightArrow">&#8594;</button>
+    </div>
+
+    <div class="service-row-wrapper">
+      <div class="service-row" id="serviceRow">
+        <!-- Example cards (only 3 shown at once) -->
+        <div class="service-card">
+          <div class="img-circle"><img src="/static/img/service-1.jpg" alt=""></div>
+          <h4>Quality Maintain</h4>
+          <p>We ensure top-notch quality at every step, with attention to detail and consistent standards.</p>
+          <a href="#">Learn More</a>
+        </div>
+        <div class="service-card">
+          <div class="img-circle"><img src="/static/img/service-2.jpg" alt=""></div>
+          <h4>Individual Approach</h4>
+          <p>Every customer is unique, and we tailor our service to meet your individual needs and preferences.</p>
+          <a href="#">Learn More</a>
+        </div>
+        <div class="service-card">
+          <div class="img-circle"><img src="/static/img/service-3.jpg" alt=""></div>
+          <h4>Celebration Ice Cream</h4>
+          <p>Perfect for parties and special moments — delicious ice cream made to bring joy to every celebration.</p>
+          <a href="#">Learn More</a>
+        </div>
+        <div class="service-card">
+          <div class="img-circle"><img src="/static/img/service-4.jpg" alt=""></div>
+          <h4>Seasonal Specials</h4>
+          <p>Unique flavors that celebrate every season.</p>
+          <a href="#">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="hero2">
+    <div class="hero-text">
+      <h1>Find your new fave flavor.</h1>
+      <p>Take the quiz to see which flavor you’re feeling.</p>
+      <!--<button>Take the quiz →</button>-->
+    </div>
+    <div class="image-collage">
+      <img src="/static/img/icecream1.jpg" alt="Chocolate Mint" class="img1">
+      <img src="/static/img/icecream2.jpg" alt="Caramel Swirl" class="img2">
+      <img src="/static/img/icecream3.jpg" alt="Cherry Topping" class="img3">
+      <img src="/static/img/icecream4.jpg" alt="Chocolate Stack" class="img4">
+      <img src="/static/img/Icecream5.jpg" alt="Vanilla Almond" class="img5">
+      <img src="/static/img/Icecream6.jpg" alt="Vanilla Almond" class="img6">
+    </div>
+  </section>
+
+
+  <div class="line"></div>
+  <h1 class="Best">Best Prices We Offer For <br> Ice Cream Lovers</h1>
+  <div class="ice_container">
+    <div class="c1">
+      <div class="card">
+        <div class="price-tag" style=" height:35px;">$19</div>
+        <img src="/static/img/product-3.jpg" alt="Vanilla Ice Cream">
+        <h3>Vanilla Ice Cream</h3>
+        <button>Order Now</button>
+      </div>
+
+      <div class="card">
+        <div class="price-tag" style=" height:35px;">$39</div>
+        <img src="/static/img/product-1.jpg" alt="Vanilla Ice Cream">
+        <h3>Tripple Ice Cream</h3>
+        <button>Order Now</button>
+      </div>
+
+      <div class="card">
+        <div class="price-tag" style=" height:35px;">$35</div>
+        <img src="/static/img/product-2.jpg" alt="Vanilla Ice Cream">
+        <h3>Chocolate Ice Cream</h3>
+        <button>Order Now</button>
+      </div>
+
+      <div class="card">
+        <div class="price-tag" style=" height:35px;">$29</div>
+        <img src="/static/img/product-4.jpg" alt="Vanilla Ice Cream">
+        <h3>Blueberry Twist</h3>
+        <button>Order Now</button>
+      </div>
+    </div>
+  </div>
+
+
+
+
+      <!-- Footer Section -->
+      <footer class="footer">
+        <div class="footer-container">
+          <!-- Brand / About -->
+          <div class="footer-brand">
+            <h2><span class="i">i</span>CREAM</h2>
+            <p>Traditional & Delicious Ice Cream Since 1950</p>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Menu</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact Information -->
+          <div class="footer-contact">
+            <h3>Contact Info</h3>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Ice Cream St, Sweet City</p>
+            <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+            <p><i class="fas fa-envelope"></i> info@icream.com</p>
+          </div>
+
+          <!-- Newsletter Signup -->
+          <div class="footer-newsletter">
+            <h3>Newsletter</h3>
+            <p>Subscribe to our newsletter for the latest updates</p>
+            <form action="#">
+              <input type="email" placeholder="Your email" required>
+              <button type="submit">Subscribe</button>
+            </form>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 iCREAM. All Rights Reserved.</p>
+        </div>
+      </footer>
+
+
+
+
+
+
+      <script>
+        const hero = document.getElementById('hero');
+        const images = [
+          '/static/img/carousel-1.jpg',
+          '/static/img/carousel-2.jpg',
+        ];
+
+        let current = 0;
+
+        function updateBackground() {
+          hero.style.backgroundImage = `url('${images[current]}')`;
+        }
+
+        function changeSlide(direction) {
+          current += direction;
+          if (current < 0) current = images.length - 1;
+          if (current >= images.length) current = 0;
+          updateBackground();
+        }
+
+        // Initial image
+        updateBackground();
+
+        function openVideo() {
+          var modal = document.getElementById("videoModal");
+          var video = document.getElementById("myVideo");
+          modal.style.display = "block";
+          video.currentTime = 0;
+          video.play();
+        }
+
+        document.querySelector(".close-btn").onclick = function () {
+          var modal = document.getElementById("videoModal");
+          var video = document.getElementById("myVideo");
+          modal.style.display = "none";
+          video.pause();
+        };
+
+        window.onclick = function (event) {
+          var modal = document.getElementById("videoModal");
+          var video = document.getElementById("myVideo");
+          if (event.target === modal) {
+            modal.style.display = "none";
+            video.pause();
+          }
+        };
+
+        const serviceRow = document.getElementById('serviceRow');
+        const leftArrow = document.getElementById('leftArrow');
+        const rightArrow = document.getElementById('rightArrow');
+
+        const cardWidth = 330; // 300px + 30px gap
+        const visibleCards = 3;
+        let currentIndex = 0;
+        let totalCards = serviceRow.children.length;
+
+        // Clone first 3 cards and append them at the end
+        const clones = [];
+        for (let i = 0; i < visibleCards; i++) {
+          const clone = serviceRow.children[i].cloneNode(true);
+          serviceRow.appendChild(clone);
+          clones.push(clone);
+        }
+
+        function updateScroll(animate = true) {
+          serviceRow.style.transition = animate ? 'transform 0.5s ease' : 'none';
+          serviceRow.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+        }
+
+        rightArrow.addEventListener('click', () => {
+          currentIndex++;
+          updateScroll();
+
+          // When we reach the cloned cards, reset to real start
+          if (currentIndex === totalCards) {
+            setTimeout(() => {
+              serviceRow.style.transition = 'none';
+              currentIndex = 0;
+              updateScroll(false);
+            }, 500); // match transition duration
+          }
+        });
+
+        leftArrow.addEventListener('click', () => {
+          if (currentIndex === 0) {
+            // Jump instantly to cloned set, then step back
+            serviceRow.style.transition = 'none';
+            currentIndex = totalCards;
+            updateScroll(false);
+
+            setTimeout(() => {
+              currentIndex--;
+              updateScroll(true);
+            }, 20);
+          } else {
+            currentIndex--;
+            updateScroll();
+          }
+        });
+      </script>
+
+</body>
+
+</html>

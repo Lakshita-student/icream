@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      background: #f9a9c4;
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: white;
+      align-items: center;
+      height: 100px;
+    }
+
+    .top-bar a {
+      color: white;
+      margin: 0 0.5rem;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .left-links a::after {
+      content: "";
+    }
+
+    .right-icons a {
+      margin-left: 10px;
+      font-size: 16px;
+      /* or maybe 20px depending on what you want */
+      color: white;
+    }
+
+    .cart-icon a {
+      margin-left: 10px;
+      font-size: 16px;
+      /* or maybe 20px depending on what you want */
+      color: white;
+    }
+
+    #cartIcon {
+      position: relative;
+      display: inline-block;
+    }
+
+
+    /* Navigation Bar */
+    .navbar {
+      background: white;
+      border-radius: 40px;
+      padding: 1.2rem 2rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+      width: 90%;
+      max-width: 1200px;
+      margin: -40px auto 0;
+      z-index: 10;
+      position: relative;
+      height: 90px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      font-size: 15px;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a.active,
+    .nav-links a:hover {
+      color: #f57aa7;
+    }
+
+    .logo {
+      font-size: 50px;
+      font-weight: 700;
+      color: #40cbee;
+    }
+
+    .logo span {
+      color: #f57aa7;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: url('../static/img/portfolio-2.jpg') no-repeat center center/cover;
+      height: 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      position: relative;
+      margin-top: -50px;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .hero h1 {
+      font-size: 65px;
+      font-weight: 900;
+      position: relative;
+      z-index: 1;
+    }
+
+    .breadcrumb {
+      margin-top: 10px;
+      font-size: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .breadcrumb a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .breadcrumb span {
+      margin: 0 5px;
+      color: white;
+      font-size: 18px;
+    }
+
+    .section-title{
+        margin-top:150px;
+        margin-bottom: 70px;
+    }
+
+    .section-title h1{
+        font-size: 40px;
+        margin-left:430px;
+        color:#333;
+    }
+
+    .section-title .line {
+    width: 100px;
+    height: 4px;
+    background-color: #f57aa7;
+    margin: 0 auto 10px auto;
+    border-radius: 10px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 80px auto;
+      padding: 40px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      animation: rainbow 10s ease infinite, pulseGlow 2s infinite;
+    }
+
+    @keyframes rainbow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px #fff, 0 0 20px #f57aa7, 0 0 30px #ff6ec4;
+  }
+  50% {
+    box-shadow: 0 0 20px #fff, 0 0 30px #47c9e5, 0 0 40px #7873f5;
+  }
+}
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .row {
+      display: flex;
+      gap: 20px;
+    }
+
+    .row input {
+      width: 100%;
+    }
+
+    input, textarea {
+      padding: 14px;
+      border: 1px solid #ddd;
+      border-radius: 30px;
+      font-size: 16px;
+      outline: none;
+      resize: none;
+    }
+
+    textarea {
+      height: 120px;
+      border-radius: 20px;
+    }
+
+    button {
+      padding: 14px;
+      font-size: 16px;
+      background-color: #f49fc7;
+      border: none;
+      color: white;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #ec82b3;
+    }
+
+    @media (max-width: 600px) {
+      .row {
+        flex-direction: column;
+      }
+    }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="left-links">
+      <a href="#">FAQs</a> |
+      <a href="#">Help</a> |
+      <a href="#">Support</a>
+    </div>
+    <div class="right-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="/Wishlist"><i class="fa-solid fa-heart"></i></a>
+      <!--<i class="fa-solid fa-cart-shopping"></i>-->
+      <a href="/login"><i class="fa-solid fa-user" style="color: white;"></i></a>
+      <a href="/Cart" alt="Cart" id="cartIcon" class="cart-icon"><i class="fa-solid fa-cart-shopping"></i></a>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <nav>
+      <ul class="nav-links">
+        <li><a class="active" href="/">Home</a></li>
+        <li><a href="/About">About</a></li>
+        <li><a href="/Product">Product</a></li>
+      </ul>
+      <div class="logo">i<span>CREAM</span></div>
+      <ul class="nav-links">
+        <li><a href="/Blog">Blogs</a></li>
+        <li><a href="/Gallery">Gallery</a></li>
+        <li><a href="/Contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Contact</h1>
+    <div class="breadcrumb">
+      <a href="#">Home</a> <span>●</span> <span>Contact</span>
+    </div>
+  </section>
+
+  <!--Section Title-->
+  <div class="section-title">
+    <div class="line"></div>
+    <h1>Contact Us For Any Query</h1>
+  </div>
+
+  <div class="container">
+  <form onsubmit="submitForm(event)">
+    <div class="row">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+    </div>
+    <input type="text" placeholder="Subject" required>
+    <textarea placeholder="Message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+  </div>
+  <script>
+    function submitForm(event) {
+      event.preventDefault(); // prevent actual form submission
+      alert("Message has been sent");
+    }
+  </script>
+
+</body>
+</html>
